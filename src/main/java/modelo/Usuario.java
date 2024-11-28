@@ -1,11 +1,6 @@
 package modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
@@ -27,14 +22,15 @@ public class Usuario {
 
     @Column(name = "password")
     private String password;
-    
+
+    @Enumerated(EnumType.STRING) 
     @Column(name = "rol")
-    private String rol;
+    private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellidos, String email, String password, String rol) {
+    public Usuario(String nombre, String apellidos, String email, String password, Rol rol) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -42,15 +38,7 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getRol() {
-		return rol;
-	}
-
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
-
-	// Getters y Setters
+    // Getters y Setters
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -91,9 +79,17 @@ public class Usuario {
         this.password = password;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
     @Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", password=" + password + ", rol=" + rol + "]";
-	}
+    public String toString() {
+        return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+                + email + ", password=" + password + ", rol=" + rol + "]";
+    }
 }

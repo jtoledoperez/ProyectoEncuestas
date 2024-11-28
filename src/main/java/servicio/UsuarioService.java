@@ -1,9 +1,8 @@
 package servicio;
 
-import java.util.List;
-
 import dao.UsuarioDAO;
 import modelo.Usuario;
+import java.util.List;
 
 public class UsuarioService {
 

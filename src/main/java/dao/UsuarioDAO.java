@@ -1,14 +1,13 @@
 package dao;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-
 import hibernate.HibernateManager;
 import modelo.Usuario;
+
+import java.util.List;
 
 public class UsuarioDAO {
 
@@ -28,6 +27,17 @@ public class UsuarioDAO {
 			System.err.println("Error al abrir la sesión de Hibernate: " + e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	public Usuario getByEmail(String email) {
+	    try (Session session = HibernateManager.getSessionFactory().openSession()) {
+	        Query<Usuario> query = session.createQuery("FROM Usuario WHERE email = :email", Usuario.class);
+	        query.setParameter("email", email);
+	        return query.uniqueResult();
+	    } catch (Exception e) {
+	        System.err.println("Error obteniendo usuario por email: " + e.getMessage());
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 
 	// Verificar si un usuario con un correo electrónico ya existe
@@ -119,4 +129,3 @@ public class UsuarioDAO {
 		}
 	}
 }
-

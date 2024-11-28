@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,7 +33,7 @@
     </style>
 </head>
 <body>
-    <!-- Barra de navegación -->
+    <!-- Barra de navegaciÃ³n -->
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
            <img src="assets/img/serbatic_logo_white.svg" class="logo" width= "150px">
@@ -56,15 +55,15 @@
                     <input type="text" class="form-control" id="apellido" name="apellido" required>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <label for="email" class="form-label">Correo ElectrÃ³nico</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
+                    <label for="password" class="form-label">ContraseÃ±a</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                    <label for="confirmPassword" class="form-label">Confirmar ContraseÃ±a</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Registrarse</button>
@@ -72,13 +71,13 @@
         </div>
     </div>
 
-    <!-- Pie de página -->
+    <!-- Pie de pÃ¡gina -->
     <footer class="py-3">
-        <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+        <p>Â© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-</body>
+  </body>
 </html>

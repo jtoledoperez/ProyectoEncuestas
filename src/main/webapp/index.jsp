@@ -12,7 +12,7 @@
             background-color: #f4f4f4;
         }
         header {
-            background-color: #2c3e50;
+            background-color: #78C0E0;
             color: white;
         }
         header .login {
@@ -25,7 +25,7 @@
         footer {
             margin-top: 40px;
             text-align: center;
-            color: #7f8c8d;
+            color: #78C0E0;
         }
         .encuesta-item {
             border: 1px solid #ddd;
@@ -43,10 +43,11 @@
     <!-- Barra de navegación -->
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
+          <img src="assets/img/serbatic_logo_white.svg" class="logo" width= "150px">
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
                 <!-- Enlace para iniciar sesión que redirige a login.jsp -->
-                <a href="login.jsp" class="btn btn-primary">Iniciar Sesión</a>
+                <a href="login.jsp" class="btn btn-light">Iniciar Sesión</a>
             </div>
         </div>
     </header>

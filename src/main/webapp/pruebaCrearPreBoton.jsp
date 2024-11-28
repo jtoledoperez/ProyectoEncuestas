@@ -4,9 +4,11 @@
     <title>Bienvenido</title>
 </head>
 <body>
-    <h1>Bienvenido</h1>
+    <h1>Vista con el botón Crear Pregunta</h1>
     <form action="BotonCrearPreguntaServlet" method="get">
-        <input type="hidden" name="idEncuesta" value="1"> <!-- ID de encuesta fija -->
+        <!-- Campo oculto para el id de la encuesta -->
+        <!-- <input type="hidden" name="idEncuesta" value="1"> -->
+        <input type="hidden" name="idEncuesta" value="${idEncuesta}">         
         <button type="submit">Crear Pregunta</button>
     </form>
 </body>

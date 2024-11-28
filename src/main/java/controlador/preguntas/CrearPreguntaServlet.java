@@ -63,7 +63,7 @@ public class CrearPreguntaServlet extends HttpServlet {
             }
 
             // Redirigir con éxito
-            response.sendRedirect("pruebaCrearPreBoton.jsp?success=true");
+            response.sendRedirect("pruebaCrearPreBoton.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,17 +22,18 @@
         <label for="respuesta4">Respuesta 4:</label><br>
         <input type="text" id="respuesta4" name="respuesta4" required><br><br>
 
-        <!-- Campo oculto para el ID de la encuesta -->
+        <!-- Campo oculto para el id de la encuesta -->
         <input type="hidden" name="idEncuesta" value="${idEncuesta}">
         
+        <!-- Mensaje de error al procesar los datos -->
         <% 
-    String error = request.getParameter("error");
-    if (error != null) { 
-%>
-    <p style="color: red;">Error: <%= error %></p>
-<% 
-    } 
-%>
+		    String error = request.getParameter("error");
+		    if (error != null) { 
+		%>
+		    <p style="color: red;">Error: <%= error %></p>
+		<% 
+		    } 
+		%>
 
         <button type="submit">Crear Pregunta</button>
     </form>

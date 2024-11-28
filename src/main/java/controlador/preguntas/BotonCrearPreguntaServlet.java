@@ -6,15 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * Servlet BotonCrearPreguntaServlet
+ * servlet que maneja la petición get para mandar el id de la encuesta y redirigir a crearPregunta.jsp
+ * 
+ * @author Paula Ruano
+ */
 @WebServlet("/BotonCrearPreguntaServlet")
 public class BotonCrearPreguntaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Recoge el ID de la encuesta
+        // recoger el id de la encuesta desde el fomulario
         String idEncuesta = request.getParameter("idEncuesta");
         
-        // Pasa el ID a la vista de creación
+        // almacenar idEncuesta en el objeto HttpServletRequest para que esté accesible en crearPregunta.jsp
         request.setAttribute("idEncuesta", idEncuesta);
+        
+        // redirigir a crearPregunta.jsp
         request.getRequestDispatcher("crearPregunta.jsp").forward(request, response);
     }
 }

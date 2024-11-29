@@ -9,7 +9,17 @@
 <h2>Bienvenido, <%= ((modelo.Usuario) session.getAttribute("usuario")).getNombre() %>!</h2>
 <p>Has iniciado sesión correctamente.</p>
 
-<a href="logout.jsp">Cerrar sesión</a>
 
+
+	<form action="CrearEncuestaServlet" method="POST">
+	<button type="submit" >Crear Encuesta</button>
+	
+	<form action="ListarEncuestasServlet" method="POST">
+	<button type="submit" >Ver encuestas</button>
+	
+	
+	<form action="LogOutServlet" method="POST">
+	<button type="submit" >LogOut</button>
+</form>
 </body>
 </html>

@@ -16,7 +16,7 @@ import servicio.UsuarioService;
 /**
  * Servlet implementation class ListarUsuariosServlet
  */
-@WebServlet("/ListarUsuariosServlet")
+@WebServlet("/listar-usuarios")
 public class ListarUsuariosServlet extends HttpServlet {
 
 	private UsuarioService usuarioService;

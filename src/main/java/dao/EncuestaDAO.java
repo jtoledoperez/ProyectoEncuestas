@@ -52,7 +52,8 @@ public class EncuestaDAO {
     // Obtener todas las encuestas
     public List<Encuesta> getAll() {
         try (Session session = HibernateManager.getSessionFactory().openSession()) {
-            Query<Encuesta> query = session.createQuery("FROM Encuesta", Encuesta.class);
+            // Consulta HQL para cargar encuestas junto con sus usuarios
+            Query<Encuesta> query = session.createQuery("FROM Encuesta e JOIN FETCH e.usuario", Encuesta.class);
             return query.list();
         } catch (Exception e) {
             System.err.println("Error obteniendo las encuestas: " + e.getMessage());

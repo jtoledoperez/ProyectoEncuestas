@@ -43,7 +43,8 @@
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
                 <!-- Enlace para iniciar sesiÃ³n que redirige a login.jsp -->
-                <a href="login.jsp" class="btn btn-light">Iniciar SesiÃ³n</a>
+                <form action="LoginServlet" method="POST">
+	<button type="submit" >Inicia sesion</button>
             </div>
         </div>
     </header>

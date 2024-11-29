@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Servlet implementation class RegistroServlet
  */
-@WebServlet("/RegistroServlet")
+@WebServlet("/registro")
 public class RegistroServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

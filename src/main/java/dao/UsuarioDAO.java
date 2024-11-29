@@ -43,7 +43,7 @@ public class UsuarioDAO {
 	        try (Session session = HibernateManager.getSessionFactory().openSession()) {
 	            Query<Usuario> query = session.createQuery("FROM Usuario WHERE nombre = :nombre", Usuario.class);
 	            query.setParameter("nombre", nombre);
-	            return query.uniqueResult(); // Devuelve un único resultado o null si no se encuentra
+	            return query.uniqueResult(); 
 	        } catch (Exception e) {
 	            System.err.println("Error obteniendo usuario por nombre: " + e.getMessage());
 	            e.printStackTrace();
@@ -79,7 +79,7 @@ public class UsuarioDAO {
 	// Obtener todos los usuarios
 	public List<Usuario> getAll() {
 		try (Session session = HibernateManager.getSessionFactory().openSession()) {
-			// Realizamos la consulta para obtener todos los usuarios
+		
 			Query<Usuario> query = session.createQuery("FROM Usuario", Usuario.class);
 			return query.list();
 		} catch (Exception e) {

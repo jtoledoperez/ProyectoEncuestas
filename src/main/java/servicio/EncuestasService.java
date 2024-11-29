@@ -18,7 +18,7 @@ public class EncuestasService {
     }
 
     public String crearEncuesta(String nombreUsuario, String nombreEncuesta) {
-        // Buscar usuario por nombre
+     
         Usuario usuario = usuarioDAO.getByNombre(nombreUsuario);
         if (usuario == null) {
             return "Usuario no encontrado.";

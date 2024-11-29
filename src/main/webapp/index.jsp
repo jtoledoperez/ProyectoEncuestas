@@ -8,7 +8,7 @@
             background-color: #f4f4f4;
         }
         header {
-            background-color: #2c3e50;
+            background-color: #78C0E0;
             color: white;
         }
         header .login {
@@ -21,7 +21,7 @@
         footer {
             margin-top: 40px;
             text-align: center;
-            color: #7f8c8d;
+            color: #78C0E0;
         }
         .encuesta-item {
             border: 1px solid #ddd;
@@ -36,13 +36,14 @@
     </style>
 </head>
 <body>
-    <!-- Barra de navegación -->
+    <!-- Barra de navegaciÃ³n -->
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
+          <img src="assets/img/serbatic_logo_white.svg" class="logo" width= "150px">
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
-                <!-- Enlace para iniciar sesión que redirige a login.jsp -->
-                <a href="login.jsp" class="btn btn-primary">Iniciar Sesión</a>
+                <!-- Enlace para iniciar sesiÃƒÂ³n que redirige a login.jsp -->
+                <a href="login.jsp" class="btn btn-light">Iniciar SesiÃƒÂ³n</a>
             </div>
         </div>
     </header>
@@ -63,19 +64,19 @@
             </c:forEach>
         </div>
 
-        <!-- Botón para crear encuesta -->
+        <!-- BotÃ³n para crear encuesta -->
         <button class="btn btn-success crear-encuesta-btn" id="crearEncuestaBtn">Crear Encuesta</button>
         
-        <!-- Sección Acerca de -->
+        <!-- SecciÃ³n Acerca de -->
         <div class="mt-5">
             <h3>Acerca de</h3>
             <p>Encuestas Serbatic 2024 es una plataforma para crear y gestionar encuestas de manera sencilla.</p>
         </div>
     </div>
 
-    <!-- Pie de página -->
+    <!-- Pie de pÃ¡gina -->
     <footer class="py-3">
-        <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+        <p>Â© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Bootstrap -->
@@ -83,10 +84,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     
     <script>
-        // Simulación de estado de inicio de sesión
+        // SimulaciÃ³n de estado de inicio de sesiÃ³n
         const isLoggedIn = <c:out value="${sessionScope.loggedIn}" default="false" />;
 
-        // Mostrar el botón de crear encuesta si el usuario ha iniciado sesión
+        // Mostrar el botÃ³n de crear encuesta si el usuario ha iniciado sesiÃ³n
         if (isLoggedIn) {
             document.getElementById('crearEncuestaBtn').style.display = 'block';
         }

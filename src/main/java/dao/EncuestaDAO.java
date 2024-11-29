@@ -2,6 +2,8 @@ package dao;
 
 import hibernate.HibernateManager;
 import modelo.Encuesta;
+import modelo.Rol;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -11,19 +13,30 @@ import java.util.List;
 public class EncuestaDAO {
 
     // Guardar una encuesta
-    public void save(Encuesta encuesta) {
-        try (Session session = HibernateManager.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-            try {
-                session.save(encuesta);
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.err.println("Error guardando la encuesta: " + e.getMessage());
-                e.printStackTrace();
-            }
-        }
-    }
+	public void save(Encuesta encuesta) {
+	    try (Session session = HibernateManager.getSessionFactory().openSession()) {
+	        Transaction transaction = session.beginTransaction();
+	        try {
+	            // Verificar que el rol del usuario sea CLIENTE
+	            if (encuesta.getUsuario().getRol() != Rol.CLIENTE) {
+	                System.err.println("El usuario no tiene permisos para crear una encuesta.");
+	                return; 
+	            }
+	            
+	            // Guardar la encuesta si el usuario tiene el rol correcto
+	            session.save(encuesta);
+	            transaction.commit();
+	        } catch (Exception e) {
+	            transaction.rollback();
+	            System.err.println("Error guardando la encuesta: " + e.getMessage());
+	            e.printStackTrace();
+	        }
+	    } catch (Exception e) {
+	        System.err.println("Error abriendo la sesión de Hibernate: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+
 
     // Obtener una encuesta por su ID
     public Encuesta getById(int id) {

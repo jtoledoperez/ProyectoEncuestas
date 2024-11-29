@@ -15,7 +15,7 @@ import servicio.EncuestasService;
 /**
  * Servlet implementation class ListarEncuestasServlet
  */
-@WebServlet("/listar-enecuestas")
+@WebServlet("/listar-encuestas")
 public class ListarEncuestasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EncuestasService encuestasService;

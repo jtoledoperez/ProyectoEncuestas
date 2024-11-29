@@ -86,7 +86,7 @@
     <script>
         // Simulación de estado de inicio de sesión
         const isLoggedIn = <c:out value="${sessionScope.loggedIn}" default="false" />;
-
+		//comentario
         // Mostrar el botón de crear encuesta si el usuario ha iniciado sesión
         if (isLoggedIn) {
             document.getElementById('crearEncuestaBtn').style.display = 'block';

@@ -18,6 +18,10 @@ public class Encuesta {
     @JoinColumn(name = "usuario", referencedColumnName = "id_usuario", foreignKey = @ForeignKey(name = "encuestas_usuarios_FK"))
     private Usuario usuario;
 
+    public Encuesta(int idEncuesta) {
+    	this.idEncuesta = idEncuesta;
+    }
+    
     public Encuesta() {
     }
 

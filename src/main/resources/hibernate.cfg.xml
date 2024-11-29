@@ -30,5 +30,8 @@
         <!-- Disable the second-level cache -->
         <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         <mapping class="modelo.Usuario" />
+        <mapping class="modelo.Encuesta" />
+        <mapping class="modelo.Pregunta" />
+        <mapping class="modelo.Respuesta" />
     </session-factory>
 </hibernate-configuration>

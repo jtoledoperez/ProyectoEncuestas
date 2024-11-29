@@ -6,7 +6,6 @@ import modelo.Pregunta;
  * Clase PreguntaService 
  * servicio para las preguntas
  * 
- * @author Paula Ruano
  */
 public class PreguntaService {
 	/**

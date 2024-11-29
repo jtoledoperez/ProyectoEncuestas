@@ -6,7 +6,6 @@ import modelo.Respuesta;
  * Clace RespuestaService
  * servicio para las respuestas
  * 
- * @author Paula Ruano
  */
 public class RespuestaService {
 	/**

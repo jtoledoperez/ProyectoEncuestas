@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet BotonCrearPreguntaServlet
  * servlet que maneja la petición get para mandar el id de la encuesta y redirigir a crearPregunta.jsp
  * 
- * @author Paula Ruano
  */
 @WebServlet("/BotonCrearPreguntaServlet")
 public class BotonCrearPreguntaServlet extends HttpServlet {

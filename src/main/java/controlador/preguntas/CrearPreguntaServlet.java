@@ -14,60 +14,83 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Servlet CrearPreguntaServlet
+ * servlet que maneja la petición post para procesar las preguntas y respuestas del formulario y crear los registros en la base de datos
+ * 
+ */
 @WebServlet("/CrearPreguntasServlet")
 public class CrearPreguntaServlet extends HttpServlet {
+	// instancias de los servicios de pregunta y respuesta
+	private PreguntaService preguntaService;
+	private RespuestaService respuestaService;
+	
+	// método init para inicializar los servicios
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		preguntaService = new PreguntaService();
+		respuestaService = new RespuestaService();
+	}
 
-    private PreguntaService preguntaService;
-    private RespuestaService respuestaService;
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			// obtener el id de la encuesta del campo oculto
+			String idEncuestaString = request.getParameter("idEncuesta");
+			// parsear el id de encuesta de string a int
+			int idEncuesta = Integer.parseInt(idEncuestaString);
+			// instancia de pregunta
+			Pregunta pregunta = new Pregunta();
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        preguntaService = new PreguntaService();
-        respuestaService = new RespuestaService();
-    }
+			// validar que el id de la encuesta existe
+			if (idEncuestaString == null || idEncuestaString.isEmpty()) {
+				response.sendRedirect("crearPregunta.jsp?error=Faltan datos");
+				return;
+			}
+			
+			// iterar sobre las preguntas
+			for (int i = 1; request.getParameter("pre" + i + "textoPregunta") != null; i++) {
+				// obtener el texto de la pregunta
+				String textoPregunta = request.getParameter("pre" + i + "textoPregunta");
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Obtener datos del formulario
-            String textoPregunta = request.getParameter("textoPregunta");
-            String idEncuestaParam = request.getParameter("idEncuesta");
+				// validar que el texto de la pregunta no esté vacío o sea nulo
+				if (textoPregunta == null || textoPregunta.isEmpty()) {
+					response.sendRedirect("crearPregunta.jsp?error=Faltan datos en alguna pregunta");
+					return;
+				}
+				
+				// añadir datos a la pregunta
+				pregunta.setTexto(textoPregunta);
+				pregunta.setEncuesta(new Encuesta(idEncuesta)); 
 
-            // Validación básica
-            if (textoPregunta == null || idEncuestaParam == null || textoPregunta.isEmpty()) {
-                response.sendRedirect("crearPregunta.jsp?error=Faltan datos");
-                return;
-            }
+				// guardar la pregunta
+				preguntaService.guardarPregunta(pregunta);
 
-            int idEncuesta = Integer.parseInt(idEncuestaParam);
+				// iterar sobre las respuestas para crearlas en la base de datos
+				for (int j = 1; j <= 4; j++) {
+					// obtener el texto de la respuesta
+					String textoRespuesta = request.getParameter("pre" + i + "res" + j);
+					// validar que el texto de la respuesta no sea nulo o esté vacío
+					if (textoRespuesta != null && !textoRespuesta.isEmpty()) {
+						// crear las instancias de respuesta
+						Respuesta respuesta = new Respuesta();
+						// añadir datos a la respuesta
+						respuesta.setTexto(textoRespuesta);
+						respuesta.setPregunta(pregunta); 
 
-            // Crear la entidad Pregunta
-            Pregunta pregunta = new Pregunta();
-            pregunta.setTexto(textoPregunta);
-            pregunta.setEncuesta(new Encuesta(idEncuesta)); // Relación con Encuesta
+						// guardar la respuesta
+						respuestaService.guardarRespuesta(respuesta);
+					} 
+				}
+			}
 
-            // Guardar la pregunta
-            preguntaService.guardarPregunta(pregunta);
+			// redirección
+			response.sendRedirect("pruebaCrearPreBoton.jsp");
 
-            // Crear las respuestas asociadas
-            for (int i = 1; i <= 4; i++) {
-                String textoRespuesta = request.getParameter("respuesta" + i);
-                if (textoRespuesta != null && !textoRespuesta.isEmpty()) {
-                    Respuesta respuesta = new Respuesta();
-                    respuesta.setTexto(textoRespuesta);
-                    respuesta.setPregunta(pregunta); // Relación con Pregunta
-                    respuestaService.guardarRespuesta(respuesta);
-                }
-            }
-
-            // Redirigir con éxito
-            response.sendRedirect("pruebaCrearPreBoton.jsp");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("crearPregunta.jsp?error=Error al procesar los datos");
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect("crearPregunta.jsp?error=Error al procesar los datos");
+		}
+	}
 }

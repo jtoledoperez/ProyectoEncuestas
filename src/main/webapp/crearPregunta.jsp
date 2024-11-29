@@ -7,25 +7,30 @@
     <h1>Crear Pregunta</h1>
     <form action="CrearPreguntasServlet" method="post">
         <label for="textoPregunta">Texto de la pregunta:</label><br>
-        <input type="text" id="textoPregunta" name="textoPregunta" required><br><br>
+        <input type="text" id="textoPregunta" name="textoPregunta${formularioContador}" required><br><br>
 
         <h3>Respuestas:</h3>
+        
+         <!-- input con contador -->
+        <label for="res1${formularioContador}">Respuesta 1:</label><br>
+        <input type="text" id="res1" name="pre${formularioContador}res1" required><br><br>
+        
         <label for="respuesta1">Respuesta 1:</label><br>
-        <input type="text" id="respuesta1" name="respuesta1" required><br><br>
+        <input type="text" name="res1" required><br><br>
 
         <label for="respuesta2">Respuesta 2:</label><br>
-        <input type="text" id="respuesta2" name="respuesta2" required><br><br>
+        <input type="text" name="res2" required><br><br>
 
         <label for="respuesta3">Respuesta 3:</label><br>
-        <input type="text" id="respuesta3" name="respuesta3" required><br><br>
+        <input type="text" name="res3" required><br><br>
 
         <label for="respuesta4">Respuesta 4:</label><br>
-        <input type="text" id="respuesta4" name="respuesta4" required><br><br>
+        <input type="text" name="res4" required><br><br>
 
         <!-- Campo oculto para el id de la encuesta -->
         <input type="hidden" name="idEncuesta" value="${idEncuesta}">
         
-        <!-- Mensaje de error al procesar los datos -->
+        <!-- Mensaje error al procesar los datos -->
         <% 
 		    String error = request.getParameter("error");
 		    if (error != null) { 

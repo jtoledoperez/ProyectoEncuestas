@@ -1,6 +1,5 @@
 
-
-    <title>Encuestas Serbatic 2024</title>
+<title>Encuestas Serbatic 2024</title>
     <!-- Enlazamos con Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -36,6 +35,7 @@
     </style>
 </head>
 <body>
+<%@ page import="modelo.Usuario" %>
     <!-- Barra de navegación -->
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
@@ -43,7 +43,11 @@
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
                 <!-- Enlace para iniciar sesiÃ³n que redirige a login.jsp -->
-                <a href="login.jsp" class="btn btn-light">Iniciar SesiÃ³n</a>
+                <% if (session.getAttribute("usuario") == null) { %>
+				    <a href="login.jsp" class="btn btn-light">Iniciar Sesi�n</a>
+				<% } else { %>
+				    <a href="logout.jsp" class="btn btn-light">Cerrar Sesion</a>
+				<% } %>
             </div>
         </div>
     </header>
@@ -64,17 +68,17 @@
             </c:forEach>
         </div>
 
-        <!-- Botón para crear encuesta -->
-        <button class="btn btn-success crear-encuesta-btn" id="crearEncuestaBtn">Crear Encuesta</button>
-        
-        <!-- Sección Acerca de -->
+			<% if (session.getAttribute("usuario") == null) { %>
+				    
+			<% } else { %>
+        		<button class="btn btn-success crear-encuesta-btn" id="crearEncuestaBtn">Crear Encuesta</button>
+			<% } %>
+        <!-- Seccionn Acerca de -->
         <div class="mt-5">
             <h3>Acerca de</h3>
             <p>Encuestas Serbatic 2024 es una plataforma para crear y gestionar encuestas de manera sencilla.</p>
         </div>
     </div>
-
-    <!-- Pie de página -->
     <footer class="py-3">
         <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
@@ -84,10 +88,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     
     <script>
-        // Simulación de estado de inicio de sesión
         const isLoggedIn = <c:out value="${sessionScope.loggedIn}" default="false" />;
-		//comentario
-        // Mostrar el botón de crear encuesta si el usuario ha iniciado sesión
         if (isLoggedIn) {
             document.getElementById('crearEncuestaBtn').style.display = 'block';
         }

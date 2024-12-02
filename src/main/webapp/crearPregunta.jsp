@@ -6,11 +6,14 @@
 <body>
     <h1>Crear Pregunta</h1>
     <form action="CrearPreguntasServlet" method="post">
+        <!-- un boton que crea una encuesta -->
+        
+        <!-- un boton que crea pregunta asociada a la encuesta -->
         <label for="textoPregunta">Texto de la pregunta:</label><br>
         <input type="text" id="textoPregunta" name="textoPregunta${formularioContador}" required><br><br>
 
         <h3>Respuestas:</h3>
-        
+        <!-- un boton que crea respuestas asociadas a la pregunta -->
          <!-- input con contador -->
         <label for="res1${formularioContador}">Respuesta 1:</label><br>
         <input type="text" id="res1" name="pre${formularioContador}res1" required><br><br>

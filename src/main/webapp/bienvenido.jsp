@@ -7,9 +7,9 @@
 <body>
 
 <h2>Bienvenido, <%= ((modelo.Usuario) session.getAttribute("usuario")).getNombre() %>!</h2>
-<p>Has iniciado sesión correctamente.</p>
+<p>Has iniciado sesiï¿½n correctamente.</p>
 
-<a href="logout.jsp">Cerrar sesión</a>
+<a href="logout.jsp">Cerrar sesiï¿½n</a>
 
 </body>
 </html>

@@ -16,7 +16,8 @@ import modelo.Usuario;
 /**
  * Servlet implementation class CrearEncuestaServlet
  */
-@WebServlet("/CrearEncuestaServlet")
+@WebServlet("/crear-encuesta")
+
 public class CrearEncuestaServlet extends HttpServlet {
 
     private EncuestaDAO encuestaDAO = new EncuestaDAO();

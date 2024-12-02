@@ -81,12 +81,12 @@ footer {
 						required>
 				</div>
 				<div class="mb-3">
-					<label for="email" class="form-label">Correo ElectrÃ³nico</label>
+					<label for="email" class="form-label">Correo Electr�nico</label>
 					<input type="email" class="form-control" id="email" name="email"
 						required>
 				</div>
 				<div class="mb-3">
-					<label for="password" class="form-label">ContraseÃ±a</label> <input
+					<label for="password" class="form-label">Contrase�a</label> <input
 						type="password" class="form-control" id="password" name="password"
 						required>
 				</div>
@@ -103,7 +103,7 @@ footer {
 
 	<!-- Pie de pÃ¡gina -->
 	<footer class="py-3">
-		<p>Â© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+		<p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
 	</footer>
 
 	<!-- Scripts de Bootstrap -->

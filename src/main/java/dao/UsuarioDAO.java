@@ -39,7 +39,17 @@ public class UsuarioDAO {
 	        return null;
 	    }
 	}
-
+	 public Usuario getByNombre(String nombre) {
+	        try (Session session = HibernateManager.getSessionFactory().openSession()) {
+	            Query<Usuario> query = session.createQuery("FROM Usuario WHERE nombre = :nombre", Usuario.class);
+	            query.setParameter("nombre", nombre);
+	            return query.uniqueResult(); 
+	        } catch (Exception e) {
+	            System.err.println("Error obteniendo usuario por nombre: " + e.getMessage());
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
 	// Verificar si un usuario con un correo electrónico ya existe
 	public boolean existsByEmail(String email) {
 		try (Session session = HibernateManager.getSessionFactory().openSession()) {
@@ -69,7 +79,7 @@ public class UsuarioDAO {
 	// Obtener todos los usuarios
 	public List<Usuario> getAll() {
 		try (Session session = HibernateManager.getSessionFactory().openSession()) {
-			// Realizamos la consulta para obtener todos los usuarios
+		
 			Query<Usuario> query = session.createQuery("FROM Usuario", Usuario.class);
 			return query.list();
 		} catch (Exception e) {

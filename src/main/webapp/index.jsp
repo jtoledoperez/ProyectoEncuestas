@@ -44,7 +44,7 @@
             <div class="login">
                 <!-- Enlace para iniciar sesiÃ³n que redirige a login.jsp -->
                 <form action="LoginServlet" method="POST">
-	<button type="submit" >Inicia sesion</button>
+	<button type="submit" >Inicia sesi�n</button>
             </div>
         </div>
     </header>
@@ -77,7 +77,7 @@
 
     <!-- Pie de página -->
     <footer class="py-3">
-        <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+        <p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Bootstrap -->

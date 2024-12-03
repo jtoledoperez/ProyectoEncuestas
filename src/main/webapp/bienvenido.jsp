@@ -11,7 +11,7 @@
 
 
 
-	<form action="CrearEncuestaServlet" method="POST">
+	<form action="crear-encuesta" method="POST">
 	<button type="submit" >Crear Encuesta</button>
 	
 	<form action="ListarEncuestasServlet" method="POST">

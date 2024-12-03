@@ -21,6 +21,11 @@ import modelo.Usuario;
 public class CrearEncuestaServlet extends HttpServlet {
 
     private EncuestaDAO encuestaDAO = new EncuestaDAO();
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect("crearEncuesta.jsp");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -44,6 +49,8 @@ public class CrearEncuestaServlet extends HttpServlet {
         Encuesta encuesta = new Encuesta(nombreEncuesta, usuario);
         encuestaDAO.save(encuesta);
 
+        request.setAttribute("idEncuesta", encuesta.getIdEncuesta());
+        
         // Confirmar la creación de la encuesta
         request.setAttribute("mensajeExito", "Encuesta creada exitosamente.");
         request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);

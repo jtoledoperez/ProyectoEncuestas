@@ -20,7 +20,7 @@
     %>
         <h2>Encuesta: <%= encuesta.getNombre() %></h2>
         <form action="guardar-respuestas" method="post">
-            <!-- Campo oculto para identificar la encuesta -->
+             <!-- Campo oculto para el id de la encuesta -->
             <input type="hidden" name="idEncuesta" value="<%= encuesta.getIdEncuesta() %>">
 
             <%

@@ -19,7 +19,7 @@ import java.util.List;
  * servlet que maneja la petición post para procesar las preguntas y respuestas del formulario y crear los registros en la base de datos
  * 
  */
-@WebServlet("/CrearPreguntasServlet")
+@WebServlet("/crear-pregunta")
 public class CrearPreguntaServlet extends HttpServlet {
 	// instancias de los servicios de pregunta y respuesta
 	private PreguntaService preguntaService;

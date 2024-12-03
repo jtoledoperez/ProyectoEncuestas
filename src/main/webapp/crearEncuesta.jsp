@@ -50,7 +50,7 @@
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
                 <!-- Enlace para iniciar sesión que redirige a login.jsp -->
-                <form action="LoginServlet" method="POST">
+                <form action="login" method="POST">
                     <button type="submit" class="btn btn-primary">Inicia sesión</button>
                 </form>
             </div>
@@ -76,7 +76,7 @@
         <% } %>
 
         <!-- Formulario para crear encuesta -->
-        <form action="CrearEncuestaServlet" method="post">
+        <form action="crear-encuesta" method="post">
             <div class="form-group mb-3">
                 <label for="nombreEncuesta">Nombre de la Encuesta:</label>
                 <input type="text" class="form-control" id="nombreEncuesta" name="nombreEncuesta" required>
@@ -85,49 +85,49 @@
         </form>
     </div>
 
-    <!-- Contenedor del formulario de creación de pregunta -->
+    <!-- Formulario de creación de pregunta -->
     <div class="container form-container">
         <h1>Crear Pregunta</h1>
-        <form action="CrearPreguntasServlet" method="post">
+        <form action="crear-pregunta" method="post">
             <div class="mb-3">
                 <label for="textoPregunta" class="form-label">Texto de la pregunta:</label>
-                <input type="text" class="form-control" id="textoPregunta" name="textoPregunta${formularioContador}" required>
+                <input type="text" class="form-control" id="pregunta" name="pregunta">
             </div>
 
             <h3>Respuestas:</h3>
             
             <div class="mb-3">
                 <label for="res1${formularioContador}" class="form-label">Respuesta 1:</label>
-                <input type="text" class="form-control" id="res1" name="pre${formularioContador}res1" required>
+                <input type="text" class="form-control" name="respuesta1">
             </div>
 
             <div class="mb-3">
                 <label for="respuesta2" class="form-label">Respuesta 2:</label>
-                <input type="text" class="form-control" name="res2" required>
+                <input type="text" class="form-control" name="respuesta2">
             </div>
 
             <div class="mb-3">
                 <label for="respuesta3" class="form-label">Respuesta 3:</label>
-                <input type="text" class="form-control" name="res3" required>
+                <input type="text" class="form-control" name="respuesta3">
             </div>
 
             <div class="mb-3">
                 <label for="respuesta4" class="form-label">Respuesta 4:</label>
-                <input type="text" class="form-control" name="res4" required>
+                <input type="text" class="form-control" name="respuesta4">
             </div>
 
             <!-- Campo oculto para el id de la encuesta -->
-            <input type="hidden" name="idEncuesta" value="${idEncuesta}">
+            <input type="hidden" name="idEncuesta" value="<%= request.getAttribute("idEncuesta") %>">
 
-            <!-- Mensaje error al procesar los datos -->
-            <%
-                String error = request.getParameter("error");
-                if (error != null) { 
-            %>
-                <p style="color: red;">Error: <%= error %></p>
-            <%
-                } 
-            %>
+            <!-- Mensajes de error -->
+           <% 
+			    String error = (String) request.getAttribute("error");
+			    if (error != null) { 
+			%>
+			    <div>
+			        <p><%= error %></p>
+			    </div>
+			<% } %>
 
             <button type="submit" class="btn btn-success">Crear Pregunta</button>
         </form>

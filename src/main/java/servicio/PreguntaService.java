@@ -36,6 +36,7 @@ public class PreguntaService {
 	}
 
 	/**
+	 * Método listarPreguntasDeUnaEncuesta
      * Método que devuelve una lista de preguntas cuya encuesta se pasa como parámetro
      *
      * @param idEncuesta 

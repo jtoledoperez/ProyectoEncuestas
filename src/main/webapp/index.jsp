@@ -60,13 +60,10 @@
                         <h5>${encuesta.titulo}</h5>
                         <p>${encuesta.descripcion}</p>
                         <a href="verEncuesta.jsp?id=${encuesta.id}" class="btn btn-info">Ver Encuesta</a>
-
-                        <a href="listar-encuestas-disponibles" class="btn btn-info">Ver Encuesta</a>
-
                         <a href="crear-encuesta" class="btn btn-info">Crear Encuesta</a>
-
-                    </div>
-                </div>
+                        <a href="listar-encuestas-disponibles" class="btn btn-info">Realizar Encuesta </a>                      
+					</div>
+            	</div>
             </c:forEach>
         </div>
 

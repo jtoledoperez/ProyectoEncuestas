@@ -49,5 +49,4 @@ public class PreguntaService {
                 .filter(pregunta -> pregunta.getEncuesta().getIdEncuesta() == idEncuesta)
                 .collect(Collectors.toList());
     }
-
 }

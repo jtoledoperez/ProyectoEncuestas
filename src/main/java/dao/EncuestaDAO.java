@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.Date;
 import java.util.List;
 
 public class EncuestaDAO {
@@ -17,12 +18,19 @@ public class EncuestaDAO {
 		try (Session session = HibernateManager.getSessionFactory().openSession()) {
 			Transaction transaction = session.beginTransaction();
 			try {
+				// Validar rol del usuario
 				if (encuesta.getUsuario().getRol() != Rol.CLIENTE) {
 					System.err.println("El usuario no tiene permisos para crear una encuesta.");
 					return;
 				}
 
-				// Guardar la encuesta si el usuario tiene el rol correcto
+				// Validar fecha de caducidad
+				if (encuesta.getCaducidad() != null && encuesta.getCaducidad().before(new Date())) {
+					System.err.println("La fecha de caducidad no puede ser anterior a la fecha actual.");
+					return;
+				}
+
+				// Guardar la encuesta si las validaciones son correctas
 				session.save(encuesta);
 				transaction.commit();
 			} catch (Exception e) {
@@ -64,6 +72,12 @@ public class EncuestaDAO {
 		try (Session session = HibernateManager.getSessionFactory().openSession()) {
 			Transaction transaction = session.beginTransaction();
 			try {
+				// Validar fecha de caducidad al actualizar
+				if (encuesta.getCaducidad() != null && encuesta.getCaducidad().before(new Date())) {
+					System.err.println("La fecha de caducidad no puede ser anterior a la fecha actual.");
+					return false;
+				}
+
 				session.update(encuesta);
 				transaction.commit();
 				return true;
@@ -75,7 +89,19 @@ public class EncuestaDAO {
 			}
 		}
 	}
-
+	//Vemos las encuestas que están activas comprobando la fecha
+	public List<Encuesta> getAllActivas() {
+	    try (Session session = HibernateManager.getSessionFactory().openSession()) {
+	        Query<Encuesta> query = session.createQuery(
+	            "FROM Encuesta e JOIN FETCH e.usuario WHERE e.caducidad >= :hoy", Encuesta.class);
+	        query.setParameter("hoy", new Date());
+	        return query.list();
+	    } catch (Exception e) {
+	        System.err.println("Error obteniendo las encuestas activas: " + e.getMessage());
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 	// Eliminar una encuesta
 	public void delete(Encuesta encuesta) {
 		try (Session session = HibernateManager.getSessionFactory().openSession()) {

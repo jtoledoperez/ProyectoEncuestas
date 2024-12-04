@@ -1,6 +1,7 @@
 package modelo;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "encuestas")
@@ -18,16 +19,21 @@ public class Encuesta {
     @JoinColumn(name = "usuario", referencedColumnName = "id_usuario", foreignKey = @ForeignKey(name = "encuestas_usuarios_FK"))
     private Usuario usuario;
 
+    @Column(name = "caducidad", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date caducidad;
+
     public Encuesta(int idEncuesta) {
-    	this.idEncuesta = idEncuesta;
+        this.idEncuesta = idEncuesta;
     }
-    
+
     public Encuesta() {
     }
 
-    public Encuesta(String nombre, Usuario usuario) {
+    public Encuesta(String nombre, Usuario usuario, Date caducidad) {
         this.nombre = nombre;
         this.usuario = usuario;
+        this.caducidad = caducidad;
     }
 
     public int getIdEncuesta() {
@@ -52,5 +58,13 @@ public class Encuesta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Date getCaducidad() {
+        return caducidad;
+    }
+
+    public void setCaducidad(Date caducidad) {
+        this.caducidad = caducidad;
     }
 }

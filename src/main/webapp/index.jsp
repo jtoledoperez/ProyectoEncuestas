@@ -29,6 +29,7 @@
             <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px">
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
+
                 <!-- Verificar si el usuario está logueado -->
                 <% 
                     HttpSession sesion = request.getSession(false); 
@@ -51,6 +52,7 @@
                 <% 
                     } 
                 %>
+
             </div>
         </div>
     </header>

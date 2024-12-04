@@ -27,11 +27,14 @@ public class ListarEncuestasServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
-		List<Encuesta> encuestas = encuestasService.listarTodasLasEncuestas();
+
+			throws ServletException, IOException {
+		// Obtener la lista de encuestas activas
+		List<Encuesta> encuestas = encuestasService.listarEncuestasActivas();
+
 
 		if (encuestas == null || encuestas.isEmpty()) {
-			request.setAttribute("mensaje", "No se encontraron encuestas.");
+			request.setAttribute("mensaje", "No se encontraron encuestas activas.");
 		} else {
 			request.setAttribute("encuestas", encuestas);
 		}

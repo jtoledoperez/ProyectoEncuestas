@@ -18,15 +18,12 @@ import servicio.UsuarioService;
  */
 @WebServlet("/listar-usuarios")
 public class ListarUsuariosServlet extends HttpServlet {
-
 	private UsuarioService usuarioService;
-
 	@Override
 	public void init() throws ServletException {
 	    super.init();
 	    usuarioService = new UsuarioService();
 	}
-
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    List<Usuario> usuarios = usuarioService.obtenerTodosUsuarios();

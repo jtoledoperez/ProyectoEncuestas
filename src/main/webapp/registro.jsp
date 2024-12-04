@@ -67,8 +67,7 @@ footer {
 			<p style="color: green;"><%=request.getAttribute("success")%></p>
 			<%
 			}
-			%>
-			<!-- Formulario de registro -->
+			%>		
 			<form action="RegistroServlet" method="POST">
 				<div class="mb-3">
 					<label for="nombre" class="form-label">Nombre</label> <input
@@ -99,9 +98,7 @@ footer {
 				<button type="submit" class="btn btn-primary w-100">Registrarse</button>
 			</form>
 		</div>
-	</div>
-
-	<!-- Pie de pÃ¡gina -->
+	</div>	
 	<footer class="py-3">
 		<p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
 	</footer>

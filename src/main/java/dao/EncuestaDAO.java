@@ -108,8 +108,7 @@ public class EncuestaDAO {
 
 			System.err.println("Error obteniendo las encuestas: " + e.getMessage());
 
-			e.printStackTrace();
-
+			e.printStackTrace();			
 			return null;
 
 		}

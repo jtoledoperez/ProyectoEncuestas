@@ -93,3 +93,16 @@ public class EncuestasService {
 }
 
  
+
+    // Método para listar todas las encuestas
+    public List<Encuesta> listarTodasLasEncuestas() {      
+
+        // Llamamos al DAO para obtener las encuestas
+        List<Encuesta> encuestas = encuestaDAO.getAll();     
+
+        return encuestas;
+    }
+}
+
+
+<>

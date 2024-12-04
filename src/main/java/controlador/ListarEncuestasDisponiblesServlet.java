@@ -36,17 +36,13 @@ public class ListarEncuestasDisponiblesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            List<Encuesta> encuestas = encuestasService.listarTodasLasEncuestas();
-
-            // filtrar poe encuestas que tienen al menos una pregunta
+            List<Encuesta> encuestas = encuestasService.listarTodasLasEncuestas();        
             List<Encuesta> encuestasConPreguntas = encuestas.stream()
                     .filter(encuesta -> {
                         List<Pregunta> preguntas = preguntaService.listarPreguntasDeUnaEncuesta(encuesta.getIdEncuesta());
                         return preguntas != null && !preguntas.isEmpty();
                     })
-                    .collect(Collectors.toList());
-
-            // verificar si hay encuestas disponibles
+                    .collect(Collectors.toList());          
             if (encuestasConPreguntas.isEmpty()) {
                 request.setAttribute("mensaje", "No se encontraron encuestas disponibles con preguntas.");
             } else {

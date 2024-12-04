@@ -49,20 +49,12 @@ public class CrearEncuestaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
- 
-        // Verificar si el usuario está autenticado
-
+        Usuario usuario = (Usuario) session.getAttribute("usuario");   
         if (usuario == null) {
-
-            response.sendRedirect("login.jsp");
-
+            response.sendRedirect("login.jsp");  
             return;
-
-        }
- 
-        // Verificar si el usuario tiene el rol de CLIENTE
+        }   
+        
 
         if (usuario.getRol() != Rol.CLIENTE) {
 
@@ -129,6 +121,16 @@ public class CrearEncuestaServlet extends HttpServlet {
             request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
 
         }
+
+
+        }        
+        String nombreEncuesta = request.getParameter("nombreEncuesta");
+        Encuesta encuesta = new Encuesta(nombreEncuesta, usuario);
+        encuestaDAO.save(encuesta);
+        request.setAttribute("idEncuesta", encuesta.getIdEncuesta());    
+        
+        request.setAttribute("mensajeExito", "Encuesta creada exitosamente.");
+        request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
 
     }
 

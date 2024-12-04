@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                 // Si la contraseña es correcta, iniciar sesión
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuario); 
-                response.sendRedirect("bienvenido.jsp"); 
+                response.sendRedirect("index.jsp"); 
             } else {
                 // Si las credenciales no son correctas
                 request.setAttribute("error", "Correo o contraseña incorrectos.");

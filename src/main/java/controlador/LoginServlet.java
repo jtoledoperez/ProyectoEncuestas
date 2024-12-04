@@ -19,56 +19,33 @@ import org.mindrot.jbcrypt.BCrypt;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LoginServlet() {
         super();
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Si el usuario ya está logueado, redirigirlo a la página principal
-        HttpSession session = request.getSession();
-        if (session.getAttribute("usuario") != null) {
-            response.sendRedirect("bienvenido.jsp"); 
-        } else {
-            request.getRequestDispatcher("login.jsp").forward(request, response); 
-        }
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Cogemos los datos
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Validamos los campos del formulario
+        // Validamos los campos
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             request.setAttribute("error", "Ambos campos son obligatorios.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
-       
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-
         try {
-            // Buscamos por el email
+            // Buscar al usuario por su email
             Usuario usuario = usuarioDAO.getByEmail(email);
-
-            // Verificar si el usuario existe y si la contraseña es correcta
+            
             if (usuario != null && BCrypt.checkpw(password, usuario.getPassword())) {
-                // Si la contraseña es correcta, iniciar sesión
+                // Iniciar sesión y redirigir
                 HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario); 
-                response.sendRedirect("bienvenido.jsp"); 
+                session.setAttribute("usuario", usuario);
+                response.sendRedirect("index.jsp");  // Redirigir a index.jsp después de login
             } else {
-                // Si las credenciales no son correctas
+                // Si el login es incorrecto
                 request.setAttribute("error", "Correo o contraseña incorrectos.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }

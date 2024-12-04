@@ -54,8 +54,7 @@ public class EncuestaDAO {
 			return query.list();
 		} catch (Exception e) {
 			System.err.println("Error obteniendo las encuestas: " + e.getMessage());
-			e.printStackTrace();
-			System.out.println("Ha llegado a getAll");
+			e.printStackTrace();			
 			return null;
 		}
 	}

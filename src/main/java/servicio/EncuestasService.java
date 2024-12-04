@@ -34,18 +34,10 @@ public class EncuestasService {
     }
 
     // Método para listar todas las encuestas
-    public List<Encuesta> listarTodasLasEncuestas() {
-        System.out.println("Recuperando todas las encuestas...");
+    public List<Encuesta> listarTodasLasEncuestas() {      
 
         // Llamamos al DAO para obtener las encuestas
-        List<Encuesta> encuestas = encuestaDAO.getAll();
-
-        // Verificamos si se han encontrado encuestas
-        if (encuestas == null || encuestas.isEmpty()) {
-            System.out.println("No se han encontrado encuestas.");
-        } else {
-            System.out.println("Se han encontrado " + encuestas.size() + " encuestas.");
-        }
+        List<Encuesta> encuestas = encuestaDAO.getAll();     
 
         return encuestas;
     }

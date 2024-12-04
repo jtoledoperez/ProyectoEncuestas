@@ -36,7 +36,7 @@
                 %>
                     <!-- Si no está logueado, mostrar el botón de "Iniciar sesión" -->
                     <form action="login" method="POST">
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        <button type="submit" class="btn btn-primary">Iniciar sesi�n</button>
                     </form>
                 <% 
                     } else { 
@@ -78,10 +78,9 @@
             </c:forEach>
         </div>
     </div>
-
-    <!-- Pie de página -->
+  
     <footer class="py-3">
-        <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+        <p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Bootstrap -->

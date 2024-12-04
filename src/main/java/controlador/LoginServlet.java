@@ -22,12 +22,10 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
         super();
     }
-
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        // Validamos los campos
+        String password = request.getParameter("password");        
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             request.setAttribute("error", "Ambos campos son obligatorios.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -35,17 +33,14 @@ public class LoginServlet extends HttpServlet {
         }
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        try {
-            // Buscar al usuario por su email
+        try {            
             Usuario usuario = usuarioDAO.getByEmail(email);
             
-            if (usuario != null && BCrypt.checkpw(password, usuario.getPassword())) {
-                // Iniciar sesión y redirigir
+            if (usuario != null && BCrypt.checkpw(password, usuario.getPassword())) {           
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuario);
-                response.sendRedirect("index.jsp");  // Redirigir a index.jsp después de login
-            } else {
-                // Si el login es incorrecto
+                response.sendRedirect("index.jsp");  
+            } else {                
                 request.setAttribute("error", "Correo o contraseña incorrectos.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }

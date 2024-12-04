@@ -16,12 +16,6 @@
     <servlet-mapping>
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/RegistroServlet</url-pattern>
-    </servlet-mapping>
-    
-
-
-
-    
-  
+    </servlet-mapping>      
 </web-app>
 

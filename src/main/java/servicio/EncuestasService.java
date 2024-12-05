@@ -5,11 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 import java.util.stream.Collectors;
- 
+
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+
 import dao.EncuestaDAO;
 
 import dao.UsuarioDAO;
-
+import hibernate.HibernateManager;
 import modelo.Encuesta;
 
 import modelo.Rol;
@@ -31,41 +35,32 @@ public class EncuestasService {
 	}
  
 	// Método para crear una encuesta con validación de fecha de caducidad
+	public String crearEncuesta(String nombreUsuario, String nombreEncuesta, Date fechaCaducidad, HttpSession session) {
+	    Usuario usuario = usuarioDAO.getByNombre(nombreUsuario);
 
-	public String crearEncuesta(String nombreUsuario, String nombreEncuesta, Date fechaCaducidad) {
+	    if (usuario == null) {
+	        return "Usuario no encontrado.";
+	    }
 
-		Usuario usuario = usuarioDAO.getByNombre(nombreUsuario);
+	    if (usuario.getRol() != Rol.CLIENTE) {
+	        return "Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.";
+	    }
 
-		if (usuario == null) {
+	    // Validar la fecha de caducidad
+	    if (fechaCaducidad == null || fechaCaducidad.before(new Date())) {
+	        return "La fecha de caducidad no puede ser nula ni anterior a la fecha actual.";
+	    }
 
-			return "Usuario no encontrado.";
+	    // Crear y guardar la encuesta
+	    Encuesta nuevaEncuesta = new Encuesta(nombreEncuesta, usuario, fechaCaducidad);
+	    encuestaDAO.save(nuevaEncuesta);
 
-		}
- 
-		if (usuario.getRol() != Rol.CLIENTE) {
+	    // Guardar o actualizar el ID de la encuesta en la sesión
+	    session.setAttribute("idEncuesta", nuevaEncuesta.getIdEncuesta());
 
-			return "Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.";
-
-		}
- 
-		// Validar la fecha de caducidad
-
-		if (fechaCaducidad == null || fechaCaducidad.before(new Date())) {
-
-			return "La fecha de caducidad no puede ser nula ni anterior a la fecha actual.";
-
-		}
- 
-		// Crear y guardar la encuesta
-
-		Encuesta nuevaEncuesta = new Encuesta(nombreEncuesta, usuario, fechaCaducidad);
-
-		encuestaDAO.save(nuevaEncuesta);
-
-		return "Encuesta creada exitosamente.";
-
+	    return "Encuesta creada exitosamente.";
 	}
- 
+	
 	// Método para listar todas las encuestas
 
 	public List<Encuesta> listarTodasLasEncuestas() {
@@ -89,20 +84,6 @@ public class EncuestasService {
 				.collect(Collectors.toList());
 
 	}
- 
 }
 
  
-
-    // Método para listar todas las encuestas
-    public List<Encuesta> listarTodasLasEncuestas() {      
-
-        // Llamamos al DAO para obtener las encuestas
-        List<Encuesta> encuestas = encuestaDAO.getAll();     
-
-        return encuestas;
-    }
-}
-
-
-<>

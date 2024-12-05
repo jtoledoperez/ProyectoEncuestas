@@ -68,7 +68,7 @@ footer {
 			<%
 			}
 			%>		
-			<form action="RegistroServlet" method="POST">
+			<form action="registro" method="POST">
 				<div class="mb-3">
 					<label for="nombre" class="form-label">Nombre</label> <input
 						type="text" class="form-control" id="nombre" name="nombre"

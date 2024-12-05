@@ -23,34 +23,19 @@
     </style>
 </head>
 <body>
+<%@ page import="modelo.Usuario" %>
     <!-- Barra de navegación -->
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
             <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px">
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
-                <!-- Verificar si el usuario está logueado -->
-                <% 
-                    HttpSession sesion = request.getSession(false); 
-                    if (sesion == null || sesion.getAttribute("usuario") == null) { 
-                %>
-                    <!-- Si no está logueado, mostrar el botón de "Iniciar sesión" -->
-                    <form action="login" method="POST">
-                        <button type="submit" class="btn btn-primary">Iniciar sesi�n</button>
-                    </form>
-                <% 
-                    } else { 
-                %>
-                    <!-- Si está logueado, mostrar botones de "Crear Encuesta" y "LogOut" -->
-                    <form action="crear-encuesta" method="POST">
-                        <button type="submit" class="btn btn-success">Crear Encuesta</button>
-                    </form>
-                    <form action="logout" method="POST">
-                        <button type="submit" class="btn btn-danger">LogOut</button>
-                    </form>
-                <% 
-                    } 
-                %>
+                <!-- Enlace para iniciar sesiÃ³n que redirige a login.jsp -->
+                <% if (session.getAttribute("usuario") == null) { %>
+				    <a href="login.jsp" class="btn btn-light">Iniciar Sesi�n</a>
+				<% } else { %>
+				    <a href="logout.jsp" class="btn btn-light">Cerrar Sesion</a>
+				<% } %>
             </div>
         </div>
     </header>
@@ -80,7 +65,7 @@
     </div>
   
     <footer class="py-3">
-        <p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+        <p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Scripts de Bootstrap -->

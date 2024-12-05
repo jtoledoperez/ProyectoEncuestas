@@ -78,7 +78,6 @@ public class CrearEncuestaServlet extends HttpServlet {
 		// Crear la encuesta utilizando el servicio
 		String resultado = encuestasService.crearEncuesta(usuario.getNombre(),
 				nombreEncuesta, fechaCaducidad, session);
-
 		if (resultado.equals("Encuesta creada exitosamente.")) {
 			request.setAttribute("mensajeExito", resultado);
 			request.getRequestDispatcher("crearEncuesta.jsp").forward(request,

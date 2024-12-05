@@ -15,7 +15,7 @@ body {
 
 header {
 	background-color: #78C0E0;
-	color: white;
+	color: black;
 }
 
 .login-form {
@@ -44,7 +44,7 @@ footer {
 	<header class="py-3">
 		<div
 			class="container d-flex justify-content-between align-items-center">
-			<img src="assets/img/serbatic_logo_white.svg" class="logo"
+			<img src="assets/img/serbatic_logo_black.svg" class="logo"
 				width="150px">
 			<h1>Encuestas Serbatic 2024</h1>
 		</div>
@@ -61,7 +61,7 @@ footer {
 			}
 			%>
 			<!-- Formulario de login -->
-			<form action="LoginServlet" method="POST">
+			<form action="login" method="POST">
 				<div class="mb-3">
 					<label for="email" class="form-label">Correo Electrónico</label>
 					<input type="email" class="form-control" id="email" name="email"

@@ -33,8 +33,14 @@ public class EncuestasService {
         return "Encuesta creada exitosamente.";
     }
 
-    public List<Encuesta> listarTodasLasEncuestas() {
-        return encuestaDAO.getAll();
+    // Método para listar todas las encuestas
+    public List<Encuesta> listarTodasLasEncuestas() {      
+
+        // Llamamos al DAO para obtener las encuestas
+        List<Encuesta> encuestas = encuestaDAO.getAll();     
+
+        return encuestas;
     }
 }
+
 

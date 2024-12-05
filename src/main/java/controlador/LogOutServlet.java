@@ -19,17 +19,11 @@ public class LogOutServlet extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Cogemos la sesion
-        HttpSession session = request.getSession(false); 
-        
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {       
+        HttpSession session = request.getSession(false);
         if (session != null) {
-            // La cerramos
             session.invalidate();
-        }
-
-        // Vamos al inicio 
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        }        
+        response.sendRedirect("index.jsp");  
     }
 }
-

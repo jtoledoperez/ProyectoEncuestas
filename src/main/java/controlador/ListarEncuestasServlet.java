@@ -27,7 +27,7 @@ public class ListarEncuestasServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {		
 		List<Encuesta> encuestas = encuestasService.listarTodasLasEncuestas();
 
 		if (encuestas == null || encuestas.isEmpty()) {

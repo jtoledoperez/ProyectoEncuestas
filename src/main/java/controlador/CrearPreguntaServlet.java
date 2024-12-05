@@ -1,4 +1,4 @@
-package controlador.preguntas;
+package controlador;
 
 import modelo.Pregunta;
 import modelo.Respuesta;
@@ -39,7 +39,7 @@ public class CrearPreguntaServlet extends HttpServlet {
             String idEncuestaParam = request.getParameter("idEncuesta");
             if (idEncuestaParam == null || idEncuestaParam.isEmpty()) {
                 request.setAttribute("error", "Por favor cree una encuesta primero.");
-                request.getRequestDispatcher("crear-encuesta").forward(request, response);
+                request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
                 return;
             }
            
@@ -49,7 +49,7 @@ public class CrearPreguntaServlet extends HttpServlet {
             String textoPregunta = request.getParameter("pregunta");
             if (textoPregunta == null || textoPregunta.trim().isEmpty()) {
                 request.setAttribute("error", "El campo de pregunta no puede estar vacío.");
-                request.getRequestDispatcher("crear-encuesta").forward(request, response);
+                request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
                 return;
             }
 
@@ -58,7 +58,7 @@ public class CrearPreguntaServlet extends HttpServlet {
                 String textoRespuesta = request.getParameter("respuesta" + i);
                 if (textoRespuesta == null || textoRespuesta.trim().isEmpty()) {
                     request.setAttribute("error", "Las preguntas tienen que tener 4 respuestas. Por favor, rellene todas.");
-                    request.getRequestDispatcher("crear-encuesta").forward(request, response);
+                    request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
                     return;
                 }
             }
@@ -83,7 +83,7 @@ public class CrearPreguntaServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Error inesperado al procesar los datos.");
-            request.getRequestDispatcher("crear-encuesta").forward(request, response);
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
         }
     }
 }

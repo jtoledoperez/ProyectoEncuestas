@@ -43,9 +43,7 @@ public class EncuestaDAO {
 			e.printStackTrace();
 		}
 	}
-
 	// Obtener una encuesta por su ID
-
 	public Encuesta getById(int id) {
 		try (Session session = HibernateManager.getSessionFactory()
 				.openSession()) {
@@ -57,9 +55,7 @@ public class EncuestaDAO {
 			return null;
 		}
 	}
-
 	// Obtener todas las encuestas
-
 	public List<Encuesta> getAll() {
 		try (Session session = HibernateManager.getSessionFactory()
 				.openSession()) {
@@ -73,7 +69,6 @@ public class EncuestaDAO {
 			return null;
 		}
 	}
-
 	// Actualizar una encuesta
 	public boolean update(Encuesta encuesta) {
 		try (Session session = HibernateManager.getSessionFactory()
@@ -99,7 +94,6 @@ public class EncuestaDAO {
 			}
 		}
 	}
-	
 	// Vemos las encuestas que están activas comprobando la fecha
 	public List<Encuesta> getAllActivas() {
 		try (Session session = HibernateManager.getSessionFactory()
@@ -116,7 +110,6 @@ public class EncuestaDAO {
 			return null;
 		}
 	}
-
 	// Eliminar una encuesta
 	public void delete(Encuesta encuesta) {
 		try (Session session = HibernateManager.getSessionFactory()

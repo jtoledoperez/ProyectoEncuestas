@@ -29,6 +29,7 @@
             <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px">
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
+
                 <!-- Verificar si el usuario está logueado -->
                 <% 
                     HttpSession sesion = request.getSession(false); 
@@ -51,6 +52,7 @@
                 <% 
                     } 
                 %>
+
             </div>
         </div>
     </header>
@@ -65,7 +67,7 @@
                     <div class="encuesta-item">
                         <h5>${encuesta.titulo}</h5>
                         <p>${encuesta.descripcion}</p>
-                        <a href="verEncuesta.jsp?id=${encuesta.id}" class="btn btn-info">Ver Encuesta</a>
+                        <a href="listarEncuestas.jsp" class="btn btn-info">Ver Encuesta</a>
 
                     </div>
                 </div>

@@ -39,7 +39,7 @@ footer {
 </style>
 </head>
 <body>
-	<!-- Barra de navegaciÃ³n -->
+	<!-- Barra de navegaciÃƒÂ³n -->
 	<header class="py-3">
 		<div
 			class="container d-flex justify-content-between align-items-center">
@@ -68,9 +68,11 @@ footer {
 			<%
 			}
 
+
 			%>
 			<!-- Formulario de registro -->
 			<form action="registro" method="POST">
+
 
 				<div class="mb-3">
 					<label for="nombre" class="form-label">Nombre</label> <input
@@ -83,18 +85,18 @@ footer {
 						required>
 				</div>
 				<div class="mb-3">
-					<label for="email" class="form-label">Correo Electr�nico</label>
+					<label for="email" class="form-label">Correo Electrónico</label>
 					<input type="email" class="form-control" id="email" name="email"
 						required>
 				</div>
 				<div class="mb-3">
-					<label for="password" class="form-label">Contrase�a</label> <input
+					<label for="password" class="form-label">Contraseña</label> <input
 						type="password" class="form-control" id="password" name="password"
 						required>
 				</div>
 				<!--<div class="mb-3">
 					<label for="confirmPassword" class="form-label">Confirmar
-						ContraseÃ±a</label> <input type="password" class="form-control"
+						ContraseÃƒÂ±a</label> <input type="password" class="form-control"
 						id="confirmPassword" name="confirmPassword" required>
 				</div> -->
 				
@@ -103,7 +105,7 @@ footer {
 		</div>
 	</div>	
 	<footer class="py-3">
-		<p>� 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+		<p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
 	</footer>
 
 	<!-- Scripts de Bootstrap -->

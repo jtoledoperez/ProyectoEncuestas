@@ -1,5 +1,4 @@
 package controlador;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,10 +15,13 @@ import modelo.Rol;
 import modelo.Usuario;
 
 /**
+ * 
  * Servlet implementation class CrearEncuestaServlet
+ * 
  */
 @WebServlet("/crear-encuesta")
 public class CrearEncuestaServlet extends HttpServlet {
+
 
 
     private EncuestasService encuestasService = new EncuestasService();
@@ -75,4 +77,5 @@ public class CrearEncuestaServlet extends HttpServlet {
         }
 
     }
+
 }

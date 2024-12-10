@@ -82,6 +82,7 @@
 
                 <label for="nombreEncuesta">Nombre de la Encuesta:</label>
                 <input type="text" class="form-control" id="nombreEncuesta" name="nombreEncuesta" required>
+
             </div>
 
             <div class="form-group">
@@ -89,6 +90,7 @@
                 <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
             </div>
             <button type="submit">Crear Encuesta</button>
+
 
         </form>
     </div>
@@ -125,7 +127,7 @@
             </div>
 
             <!-- Campo oculto para el id de la encuesta -->
-            <input type="hidden" name="idEncuesta" value="<%= request.getAttribute("idEncuesta") %>">
+            <input type="hidden" name="idEncuesta" value="<%= session.getAttribute("idEncuesta") %>">
 
             <!-- Mensajes de error -->
            <% 

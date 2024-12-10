@@ -1,11 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List, modelo.Encuesta"%>
+<%@ page import="java.util.List" %>
+<%@ page import="modelo.Encuesta" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuestas Disponibles</title>
+    <style>
+        .caducada {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Encuestas Disponibles para Realizar</h1>
@@ -26,9 +33,17 @@
             %>
                 <li>
                     <p><strong><%= encuesta.getNombre() %></strong></p>
+
+                   
+                  
+
                     <form action="realizar-encuesta" method="post">
                         <input type="hidden" name="idEncuesta" value="<%= encuesta.getIdEncuesta() %>">
-                        <button type="submit">Realizar Encuesta</button>
+                        
+                     <!-- -Dependiendo de si está caducada activamos el boton o no -->
+                        <button type="submit" <%= encuesta.isCaducada() ? "disabled" : "" %>>
+                            <%= encuesta.isCaducada() ? "Esta encuesta está caducada" : "Realizar Encuesta" %>
+                        </button>
                     </form>
                 </li>
             <% 

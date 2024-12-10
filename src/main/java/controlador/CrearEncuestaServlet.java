@@ -49,18 +49,20 @@ public class CrearEncuestaServlet extends HttpServlet {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fechaCaducidad = dateFormat.parse(caducidadStr);
 
-            // Validar que la fecha no sea anterior a la fecha actual
             if (fechaCaducidad.before(new Date())) {
                 request.setAttribute("mensajeError", "La fecha de caducidad no puede ser anterior a la fecha actual.");
                 request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
                 return;
             }
+        } catch (NullPointerException e) {
+            request.setAttribute("mensajeError", "La fecha de caducidad es obligatoria.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
         } catch (ParseException e) {
             request.setAttribute("mensajeError", "Formato de fecha inválido. Use el formato yyyy-MM-dd.");
             request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
             return;
         }
-
         // Crear la encuesta utilizando el servicio
         String resultado = encuestasService.crearEncuesta(usuario.getNombre(), nombreEncuesta, fechaCaducidad);
 

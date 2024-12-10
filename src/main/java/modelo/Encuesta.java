@@ -23,6 +23,9 @@ public class Encuesta {
     @Temporal(TemporalType.DATE)
     private Date caducidad;
 
+    @Transient  
+    private boolean caducada;
+    
     public Encuesta(int idEncuesta) {
         this.idEncuesta = idEncuesta;
     }
@@ -66,5 +69,12 @@ public class Encuesta {
 
     public void setCaducidad(Date caducidad) {
         this.caducidad = caducidad;
+    }
+    public boolean isCaducada() {
+        return caducada;
+    }
+    
+    public void setCaducada(boolean caducada) {
+        this.caducada = caducada;
     }
 }

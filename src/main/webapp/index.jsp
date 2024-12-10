@@ -67,7 +67,7 @@
                     <div class="encuesta-item">
                         <h5>${encuesta.titulo}</h5>
                         <p>${encuesta.descripcion}</p>
-                        <a href="verEncuesta.jsp?id=${encuesta.id}" class="btn btn-info">Ver Encuesta</a>
+                        <a href="listarEncuestas.jsp" class="btn btn-info">Ver Encuesta</a>
 
                     </div>
                 </div>

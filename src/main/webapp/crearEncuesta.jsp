@@ -77,14 +77,21 @@
 
         <!-- Formulario para crear encuesta -->
         <form action="crear-encuesta" method="post">
-            <div class="form-group mb-3">
+
+            <div class="form-group">
+
                 <label for="nombreEncuesta">Nombre de la Encuesta:</label>
                 <input type="text" class="form-control" id="nombreEncuesta" name="nombreEncuesta" required>
-            </div>          
-              <label for="fechaCaducidad">Fecha de Caducidad:</label>
-   			  <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
-   			  <input type="hidden" name="idEncuesta" value="<%= session.getAttribute("idEncuesta") %>">
-            <button type="submit" class="btn btn-success">Crear Encuesta</button>
+
+            </div>
+
+            <div class="form-group">
+                <label for="fechaCaducidad">Fecha de Caducidad:</label>
+                <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
+            </div>
+            <button type="submit">Crear Encuesta</button>
+
+
         </form>
     </div>
 

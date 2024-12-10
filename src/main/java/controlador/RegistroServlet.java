@@ -46,7 +46,7 @@ public class RegistroServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (nombre == null || apellidos == null || email == null || password == null ||
-                nombre.isEmpty() || apellidos.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        		  nombre.trim().isEmpty() || apellidos.trim().isEmpty() || email.isEmpty() || password.isEmpty()) {
             request.setAttribute("error", "Todos los campos son obligatorios.");
             request.getRequestDispatcher("registro.jsp").forward(request, response);
             return;

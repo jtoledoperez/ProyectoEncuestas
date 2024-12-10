@@ -52,6 +52,13 @@ public class CrearEncuestaServlet extends HttpServlet {
 		// Obtener parámetros del formulario
 		String nombreEncuesta = request.getParameter("nombreEncuesta");
 		String caducidadStr = request.getParameter("fechaCaducidad");
+		
+		// Validar que el nombre no sea nulo o solo espacios
+        if (nombreEncuesta == null || nombreEncuesta.trim().isEmpty()) {
+            request.setAttribute("mensajeError", "Nombre no válido.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
+        }
 
 		// Validar y convertir la fecha de caducidad
 		Date fechaCaducidad = null;

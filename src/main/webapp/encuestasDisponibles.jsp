@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List, modelo.Encuesta" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.List, modelo.Encuesta" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,16 +26,20 @@
     </style>
 </head>
 <body>   
+    <!-- Header -->
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
             <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px">
             <h1>Encuestas Serbatic 2024</h1>
         </div>
     </header>
+
+    <!-- Contenido principal -->
     <div class="container mt-4">
         <h1 class="mb-4">Encuestas Disponibles para Realizar</h1>
 
         <% 
+            // Mostrar un mensaje si existe
             String mensaje = (String) request.getAttribute("mensaje");
             if (mensaje != null) { 
         %>
@@ -45,6 +48,7 @@
             </div>
         <% 
             } else { 
+                // Listar encuestas si están disponibles
                 List<modelo.Encuesta> encuestas = (List<modelo.Encuesta>) request.getAttribute("encuestas");
                 if (encuestas != null && !encuestas.isEmpty()) {
         %>
@@ -57,7 +61,11 @@
                             <p><strong><%= encuesta.getNombre() %></strong></p>
                             <form action="realizar-encuesta" method="post">
                                 <input type="hidden" name="idEncuesta" value="<%= encuesta.getIdEncuesta() %>">
-                                <button type="submit" class="btn btn-primary">Realizar Encuesta</button>
+                                
+                                <!-- Botón habilitado/deshabilitado según estado de la encuesta -->
+                                <button type="submit" class="btn btn-primary" <%= encuesta.isCaducada() ? "disabled" : "" %>>
+                                    <%= encuesta.isCaducada() ? "Esta encuesta está caducada" : "Realizar Encuesta" %>
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -68,6 +76,7 @@
         <% 
                 } else { 
         %>
+            <!-- Mensaje cuando no hay encuestas disponibles -->
             <div class="alert alert-warning" role="alert">
                 No hay encuestas disponibles para realizar.
             </div>
@@ -76,6 +85,8 @@
             } 
         %>
     </div>    
+
+    <!-- Footer -->
     <footer class="py-3">
         <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>

@@ -11,14 +11,16 @@
 
 
 
+
 	<form action="crear-encuesta" method="POST">
 	<button type="submit" >Crear Encuesta</button>
+
 	
-	<form action="ListarEncuestasServlet" method="POST">
+	<form action="listar-encuesta" method="POST">
 	<button type="submit" >Ver encuestas</button>
 	
 	
-	<form action="LogOutServlet" method="POST">
+	<form action="logout" method="POST">
 	<button type="submit" >LogOut</button>
 </form>
 </body>

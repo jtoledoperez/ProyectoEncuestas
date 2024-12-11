@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import servicio.EncuestasService;
 import modelo.Rol;
 import modelo.Usuario;
@@ -21,71 +22,60 @@ import modelo.Usuario;
 @WebServlet("/crear-encuesta")
 public class CrearEncuestaServlet extends HttpServlet {
 
-	private EncuestasService encuestasService = new EncuestasService();
 
-	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		response.sendRedirect("crearEncuesta.jsp");
-	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
+    private EncuestasService encuestasService = new EncuestasService();
 
-		// Verificar si el usuario está autenticado
-		if (usuario == null) {
-			response.sendRedirect("login.jsp");
-			return;
-		}
 
-		// Verificar si el usuario tiene el rol de CLIENTE
-		if (usuario.getRol() != Rol.CLIENTE) {
-			request.setAttribute("mensajeError",
-					"Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.");
-			request.getRequestDispatcher("crearEncuesta.jsp").forward(request,
-					response);
-			return;
-		}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");   
+        if (usuario == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }        
+        if (usuario.getRol() != Rol.CLIENTE) {
+            request.setAttribute("mensajeError", "Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
 
-		// Obtener parámetros del formulario
-		String nombreEncuesta = request.getParameter("nombreEncuesta");
-		String caducidadStr = request.getParameter("fechaCaducidad");
+        }
 
-		// Validar y convertir la fecha de caducidad
-		Date fechaCaducidad = null;
+        // Obtener parámetros del formulario
+        String nombreEncuesta = request.getParameter("nombreEncuesta");
+        String caducidadStr = request.getParameter("fechaCaducidad");
 
-		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			fechaCaducidad = dateFormat.parse(caducidadStr);
-			// Validar que la fecha no sea anterior a la fecha actual
-			if (fechaCaducidad.before(new Date())) {
-				request.setAttribute("mensajeError",
-						"La fecha de caducidad no puede ser anterior a la fecha actual.");
-				request.getRequestDispatcher("crearEncuesta.jsp")
-						.forward(request, response);
-				return;
-			}
-		} catch (ParseException e) {
-			request.setAttribute("mensajeError",
-					"Formato de fecha inválido. Use el formato yyyy-MM-dd.");
-			request.getRequestDispatcher("crearEncuesta.jsp").forward(request,
-					response);
-			return;
-		}
+        // Validar y convertir la fecha de caducidad
+        Date fechaCaducidad = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            fechaCaducidad = dateFormat.parse(caducidadStr);
 
-		// Crear la encuesta utilizando el servicio
-		String resultado = encuestasService.crearEncuesta(usuario.getNombre(),
-				nombreEncuesta, fechaCaducidad, session);
-		if (resultado.equals("Encuesta creada exitosamente.")) {
-			request.setAttribute("mensajeExito", resultado);
-			request.getRequestDispatcher("crearEncuesta.jsp").forward(request,
-					response);
-		} else {
-			request.setAttribute("mensajeError", resultado);
-			request.getRequestDispatcher("crearEncuesta.jsp").forward(request,
-					response);
-		}
-	}
+            if (fechaCaducidad.before(new Date())) {
+                request.setAttribute("mensajeError", "La fecha de caducidad no puede ser anterior a la fecha actual.");
+                request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+                return;
+            }
+        } catch (NullPointerException e) {
+            request.setAttribute("mensajeError", "La fecha de caducidad es obligatoria.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
+        } catch (ParseException e) {
+            request.setAttribute("mensajeError", "Formato de fecha inválido. Use el formato yyyy-MM-dd.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
+        }
+        // Crear la encuesta utilizando el servicio
+        String resultado = encuestasService.crearEncuesta(usuario.getNombre(), nombreEncuesta, fechaCaducidad);
+
+        if (resultado.equals("Encuesta creada exitosamente.")) {
+            request.setAttribute("mensajeExito", resultado);
+            request.getRequestDispatcher("listarEncuestas.jsp").forward(request, response);
+        } else {
+            request.setAttribute("mensajeError", resultado);
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+        }
+
+    }
+
 }

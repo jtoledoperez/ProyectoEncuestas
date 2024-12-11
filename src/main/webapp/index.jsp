@@ -46,11 +46,10 @@
                         <h5>${encuesta.titulo}</h5>
                         <p>${encuesta.descripcion}</p>                   
                     </div>
-                </div>                        
+                </div>                       
                         <a href="listar-encuestas-disponibles" class="btn btn-info">Realizar Encuesta </a>                      
 					</div>
             	</div>
-
             </c:forEach>
         </div>
     </div>

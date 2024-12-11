@@ -36,6 +36,7 @@ public class PreguntaService {
 	}
 
 	/**
+	 * Método listarPreguntasDeUnaEncuesta
      * Método que devuelve una lista de preguntas cuya encuesta se pasa como parámetro
      *
      * @param idEncuesta 
@@ -43,11 +44,6 @@ public class PreguntaService {
      */
     public List<Pregunta> listarPreguntasDeUnaEncuesta(int idEncuesta) {
         List<Pregunta> todasLasPreguntas = preguntaDAO.getAll();
-
-        return todasLasPreguntas.stream()
-                .filter(pregunta -> pregunta.getEncuesta().getIdEncuesta() == idEncuesta)
-                .collect(Collectors.toList());
-    }
 
         return todasLasPreguntas.stream()
                 .filter(pregunta -> pregunta.getEncuesta().getIdEncuesta() == idEncuesta)

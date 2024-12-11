@@ -8,39 +8,7 @@
     <title>Crear Encuesta y Pregunta</title>
     <!-- Enlace a Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #78C0E0;
-            color: black;
-        }
-        header .login {
-            margin: 0;
-        }
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #78C0E0;
-        }
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-        }
-        .form-container h1 {
-            margin-bottom: 20px;
-        }
-        .form-container input {
-            margin-bottom: 10px;
-        }
-        .form-container button {
-            margin-top: 20px;
-        }
-    </style>
+    <link href="assets/styles/styles.css" rel="stylesheet">
 </head>
 <body>
     <!-- Barra de navegación -->
@@ -49,10 +17,12 @@
             <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px">
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">
-                <!-- Enlace para iniciar sesión que redirige a login.jsp -->
-                <form action="login" method="POST">
-                    <button type="submit" class="btn btn-primary">Inicia sesión</button>
+                <!--
+                 <form action="login" method="POST">
+                    <button type="submit" class="btn btn-primary">Inicia sesión</button> 
                 </form>
+                  --> 
+               
             </div>
         </div>
     </header>

@@ -9,31 +9,7 @@
     <title>Realizar Encuesta</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #78C0E0;
-            color: black;
-            padding: 10px 0;
-        }
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #78C0E0;
-            padding: 10px 0;
-        }        
-        .progress {
-            height: 20px;
-            background-color: #e0e0e0;
-        }
-
-        .progress-bar {
-            background-color: #78C0E0;
-            transition: width 0.2s ease-in-out;
-        }
-    </style>
+    <link href="assets/styles/styles.css" rel="stylesheet">
 </head>
 <body>    
     <header class="py-3">

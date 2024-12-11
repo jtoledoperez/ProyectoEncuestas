@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,22 +38,19 @@ public class ListarEncuestasDisponiblesServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             List<Encuesta> encuestas = encuestasService.listarTodasLasEncuestas();
+            Date fechaActual = new Date();
 
-            // filtrar poe encuestas que tienen al menos una pregunta
-            List<Encuesta> encuestasConPreguntas = encuestas.stream()
-                    .filter(encuesta -> {
-                        List<Pregunta> preguntas = preguntaService.listarPreguntasDeUnaEncuesta(encuesta.getIdEncuesta());
-                        return preguntas != null && !preguntas.isEmpty();
-                    })
-                    .collect(Collectors.toList());
-
-            // verificar si hay encuestas disponibles
-            if (encuestasConPreguntas.isEmpty()) {
-                request.setAttribute("mensaje", "No se encontraron encuestas disponibles con preguntas.");
-            } else {
-                request.setAttribute("encuestas", encuestasConPreguntas);
+            // Añadimos la validación de caducidad
+            for (Encuesta encuesta : encuestas) {
+                if (encuesta.getCaducidad() != null && encuesta.getCaducidad().before(fechaActual)) {
+                	// Indicamos que la encuesta está caducada
+                    encuesta.setCaducada(true); 
+                } else {
+                    encuesta.setCaducada(false);
+                }
             }
 
+            request.setAttribute("encuestas", encuestas);
             request.getRequestDispatcher("/encuestasDisponibles.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();

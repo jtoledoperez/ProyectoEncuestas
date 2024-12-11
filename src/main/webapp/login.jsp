@@ -15,7 +15,7 @@ body {
 
 header {
 	background-color: #78C0E0;
-	color: white;
+	color: black;
 }
 
 .login-form {
@@ -44,7 +44,7 @@ footer {
 	<header class="py-3">
 		<div
 			class="container d-flex justify-content-between align-items-center">
-			<img src="assets/img/serbatic_logo_white.svg" class="logo"
+			<img src="assets/img/serbatic_logo_black.svg" class="logo"
 				width="150px">
 			<h1>Encuestas Serbatic 2024</h1>
 		</div>

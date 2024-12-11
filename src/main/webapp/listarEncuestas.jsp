@@ -1,54 +1,44 @@
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="modelo.Encuesta" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Encuestas Disponibles</title>
+
+    <title>Encuestas Disponibles</title>
 </head>
+
 <body>
-	<h1>Encuestas Disponibles</h1>
+    <div class="container">
+        <h1>Encuestas Activas</h1>
 
+    
+        <% if (request.getAttribute("mensaje") != null) { %>
+            <div class="info">
+                <p><%= request.getAttribute("mensaje") %></p>
+            </div>
+        <% } %>
 
-	<%
-	String mensaje = (String) request.getAttribute("mensaje");
-	if (mensaje != null) {
-	%>
-	<p><%=mensaje%></p>
-	<%
-	}
-	%>
+     
+        <% if (request.getAttribute("encuestas") != null) { %>
+            <ul>
+                <% List<Encuesta> encuestas = (List<Encuesta>) request.getAttribute("encuestas"); %>
+                <% for (Encuesta encuesta : encuestas) { %>
+                    <li>
+                        <strong><%= encuesta.getNombre() %></strong> 
+                        (Caduca: <%= encuesta.getCaducidad() %>)
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
 
+       
+        <div class="back-link">
+            <a href="index.jsp">Volver al Inicio</a>
+        </div>
+    </div>
 
-	<%
-	java.util.List<modelo.Encuesta> encuestas = (java.util.List<modelo.Encuesta>) request.getAttribute("encuestas");
-	if (encuestas != null && !encuestas.isEmpty()) {
-	%>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nombre Encuesta</th>
-				<th>Nombre usuario</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			for (modelo.Encuesta encuesta : encuestas) {
-			%>
-			<tr>
-				<td><%=encuesta.getIdEncuesta()%></td>
-				<td><%=encuesta.getNombre()%></td>
-			 <td><%=encuesta.getUsuario() != null ? encuesta.getUsuario().getNombre() : "Sin usuario"%></td>
-			</tr>
-			<%
-			}
-			%>
-		</tbody>
-	</table>
-	<%
-	} else {
-	%>
-	<p>No hay encuestas disponibles.</p>
-	<%
-	}
-	%>
 </body>
 </html>

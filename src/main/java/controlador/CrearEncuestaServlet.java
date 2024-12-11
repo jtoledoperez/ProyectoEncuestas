@@ -22,8 +22,6 @@ import modelo.Usuario;
 @WebServlet("/crear-encuesta")
 public class CrearEncuestaServlet extends HttpServlet {
 
-
-
     private EncuestasService encuestasService = new EncuestasService();
 
 
@@ -44,6 +42,13 @@ public class CrearEncuestaServlet extends HttpServlet {
         // Obtener parámetros del formulario
         String nombreEncuesta = request.getParameter("nombreEncuesta");
         String caducidadStr = request.getParameter("fechaCaducidad");
+        
+        // Validar nombre de encuesta válido
+        if (nombreEncuesta == null || nombreEncuesta.trim().isEmpty()) {
+            request.setAttribute("mensajeError", "Nombre no válido. Por favor, introduzca un nombre para la encuesta.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
+        }
 
         // Validar y convertir la fecha de caducidad
         Date fechaCaducidad = null;

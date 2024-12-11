@@ -41,10 +41,8 @@ public class CrearPreguntaServlet extends HttpServlet {
                 request.setAttribute("error", "Por favor cree una encuesta primero.");
                 request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
                 return;
-            }
-           
-            int idEncuesta = Integer.parseInt(idEncuestaParam);
-            
+            }          
+            int idEncuesta = Integer.parseInt(idEncuestaParam);           
             // validar el texto de la pregunta
             String textoPregunta = request.getParameter("pregunta");
             if (textoPregunta == null || textoPregunta.trim().isEmpty()) {
@@ -52,7 +50,6 @@ public class CrearPreguntaServlet extends HttpServlet {
                 request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
                 return;
             }
-
             // validar el texto de las respuestas
             for (int i = 1; i <= 4; i++) {
                 String textoRespuesta = request.getParameter("respuesta" + i);
@@ -62,13 +59,11 @@ public class CrearPreguntaServlet extends HttpServlet {
                     return;
                 }
             }
-
             // crear pregunta
             Pregunta pregunta = new Pregunta();
             pregunta.setTexto(textoPregunta);
             pregunta.setEncuesta(new Encuesta(idEncuesta));
             preguntaService.guardarPregunta(pregunta);
-
             // guardar las respuestas
             for (int i = 1; i <= 4; i++) {
                 String textoRespuesta = request.getParameter("respuesta" + i);
@@ -76,8 +71,7 @@ public class CrearPreguntaServlet extends HttpServlet {
                 respuesta.setTexto(textoRespuesta);
                 respuesta.setPregunta(pregunta);
                 respuestaService.guardarRespuesta(respuesta);
-            }
-        
+            }     
             response.sendRedirect("crear-encuesta");
 
         } catch (Exception e) {

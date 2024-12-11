@@ -7,7 +7,7 @@
 <body>
 
 <h2>Bienvenido, <%= ((modelo.Usuario) session.getAttribute("usuario")).getNombre() %>!</h2>
-<p>Has iniciado sesión correctamente.</p>
+<p>Has iniciado sesiï¿½n correctamente.</p>
 
 
 

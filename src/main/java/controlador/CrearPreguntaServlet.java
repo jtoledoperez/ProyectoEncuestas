@@ -31,6 +31,10 @@ public class CrearPreguntaServlet extends HttpServlet {
         preguntaService = new PreguntaService();
         respuestaService = new RespuestaService();
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("crearPregunta.jsp").forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

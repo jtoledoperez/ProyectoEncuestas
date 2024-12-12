@@ -46,11 +46,11 @@ public class RegistroServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (nombre == null || apellidos == null || email == null || password == null ||
-                nombre.isEmpty() || apellidos.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            request.setAttribute("error", "Todos los campos son obligatorios.");
-            request.getRequestDispatcher("registro.jsp").forward(request, response);
-            return;
-        }       
+        	    nombre.trim().isEmpty() || apellidos.trim().isEmpty() || email.isEmpty() || password.isEmpty()) {
+        	    request.setAttribute("error", "Todos los campos son obligatorios.");
+        	    request.getRequestDispatcher("registro.jsp").forward(request, response);
+        	    return;
+        	}    
         UsuarioDAO usuarioDAO = new UsuarioDAO(); 
         RegistroService registroService = new RegistroService(usuarioDAO);       
         String resultado = registroService.registrarUsuario(email, password, nombre, apellidos, Rol.CLIENTE);        

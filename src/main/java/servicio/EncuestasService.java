@@ -24,35 +24,35 @@ public class EncuestasService {
 		this.usuarioDAO = new UsuarioDAO();
 	}
 
-	// Método para crear una encuesta con validación de fecha de caducidad
+	
 
-	public String crearEncuesta(String nombreUsuario, String nombreEncuesta, Date fechaCaducidad) {
+	public Integer crearEncuesta(String nombreUsuario, String nombreEncuesta, Date fechaCaducidad) {
+	    Usuario usuario = usuarioDAO.getByNombre(nombreUsuario);
 
-		Usuario usuario = usuarioDAO.getByNombre(nombreUsuario);
-		if (usuario == null) {
-			return "Usuario no encontrado.";
-		}
+	  
+	    if (usuario == null) {
+	        throw new IllegalArgumentException("Usuario no encontrado.");
+	    }
 
+	  
+	    if (usuario.getRol() != Rol.CLIENTE) {
+	        throw new IllegalArgumentException("Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.");
+	    }
 
-		if (usuario.getRol() != Rol.CLIENTE) {
-			return "Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.";
-		}
+	  
+	    if (fechaCaducidad == null || fechaCaducidad.before(new Date())) {
+	        throw new IllegalArgumentException("La fecha de caducidad no puede ser nula ni anterior a la fecha actual.");
+	    }
 
+	   
+	    Encuesta nuevaEncuesta = new Encuesta(nombreEncuesta, usuario, fechaCaducidad);
+	    encuestaDAO.save(nuevaEncuesta);
 
-		// Validar la fecha de caducidad
-		if (fechaCaducidad == null || fechaCaducidad.before(new Date())) {
-			return "La fecha de caducidad no puede ser nula ni anterior a la fecha actual.";
-		}
-
-
-		// Crear y guardar la encuesta
-		Encuesta nuevaEncuesta = new Encuesta(nombreEncuesta, usuario, fechaCaducidad);
-		encuestaDAO.save(nuevaEncuesta);
-
-		return "Encuesta creada exitosamente.";
+	    // Devolvemos el id para crear las preguntas de esta misma encuesta creada
+	    return nuevaEncuesta.getIdEncuesta();
 	}
 
-	// Método para listar todas las encuestas
+	
 	public List<Encuesta> listarTodasLasEncuestas() {
 		return encuestaDAO.getAll();
 	}
@@ -61,7 +61,6 @@ public class EncuestasService {
 		List<Encuesta> todasLasEncuestas = encuestaDAO.getAll();
 
 
-		// Filtrar encuestas no caducadas
 		Date hoy = new Date();
 		return todasLasEncuestas.stream()
 				.filter(encuesta -> encuesta.getCaducidad() != null && !encuesta.getCaducidad().before(hoy))

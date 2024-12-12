@@ -23,9 +23,11 @@ import modelo.Usuario;
 public class CrearEncuestaServlet extends HttpServlet {
 
 
-
     private EncuestasService encuestasService = new EncuestasService();
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -45,37 +47,47 @@ public class CrearEncuestaServlet extends HttpServlet {
         String nombreEncuesta = request.getParameter("nombreEncuesta");
         String caducidadStr = request.getParameter("fechaCaducidad");
 
-        // Validar y convertir la fecha de caducidad
-        Date fechaCaducidad = null;
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            fechaCaducidad = dateFormat.parse(caducidadStr);
+        // Validar nombre de la encuesta
+        if (nombreEncuesta == null || nombreEncuesta.trim().isEmpty() || nombreEncuesta.length() < 8) {
+            request.setAttribute("mensajeError", "El nombre debe contener al menos 8 caracteres y no puede empezar por un espacio.");
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+            return;
+        }
 
-            if (fechaCaducidad.before(new Date())) {
-                request.setAttribute("mensajeError", "La fecha de caducidad no puede ser anterior a la fecha actual.");
-                request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
-                return;
-            }
-        } catch (NullPointerException e) {
+        // Validar la fecha de caducidad
+        Date fechaCaducidad = null;
+        if (caducidadStr == null || caducidadStr.trim().isEmpty()) {
             request.setAttribute("mensajeError", "La fecha de caducidad es obligatoria.");
             request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
             return;
+        }
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setLenient(false); 
+            fechaCaducidad = sdf.parse(caducidadStr);
         } catch (ParseException e) {
             request.setAttribute("mensajeError", "Formato de fecha inválido. Use el formato yyyy-MM-dd.");
             request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
             return;
         }
-        // Crear la encuesta utilizando el servicio
-        String resultado = encuestasService.crearEncuesta(usuario.getNombre(), nombreEncuesta, fechaCaducidad);
 
-        if (resultado.equals("Encuesta creada exitosamente.")) {
-            request.setAttribute("mensajeExito", resultado);
-            request.getRequestDispatcher("listarEncuestas.jsp").forward(request, response);
-        } else {
-            request.setAttribute("mensajeError", resultado);
+        // Crear la encuesta utilizando el servicio
+        try {
+            int idEncuesta = encuestasService.crearEncuesta(usuario.getNombre(), nombreEncuesta, fechaCaducidad);
+
+            // Guardar el ID en la sesión
+            session.setAttribute("idEncuesta", idEncuesta);
+
+            // Redirigir a la página de creación de preguntas
+            response.sendRedirect("crearEncuesta.jsp");
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("mensajeError", e.getMessage());
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("mensajeError", "Ocurrió un error inesperado.");
             request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
         }
-
     }
-
 }

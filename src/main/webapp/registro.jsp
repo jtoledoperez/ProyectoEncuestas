@@ -13,8 +13,9 @@
 	<header class="py-3">
 		<div
 			class="container d-flex justify-content-between align-items-center">
-			<img src="assets/img/serbatic_logo_black.svg" class="logo"
-				width="150px">
+			<a href="index.jsp">
+    <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px" alt="Logo Serbatic">
+</a>
 			<h1>Encuestas Serbatic 2024</h1>
 		</div>
 	</header>

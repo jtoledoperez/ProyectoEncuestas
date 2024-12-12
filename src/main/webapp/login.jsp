@@ -9,12 +9,14 @@
 	rel="stylesheet">
 <link href="assets/styles/styles.css" rel="stylesheet">
 </head>
-<body>	
+<body>
 	<header class="py-3">
 		<div
 			class="container d-flex justify-content-between align-items-center">
-			<img src="assets/img/serbatic_logo_black.svg" class="logo"
-				width="150px">
+			<a href="index.jsp"> <img
+				src="assets/img/serbatic_logo_black.svg" class="logo" width="150px"
+				alt="Logo Serbatic">
+			</a>
 			<h1>Encuestas Serbatic 2024</h1>
 		</div>
 	</header>
@@ -28,12 +30,11 @@
 			<p style="color: red;"><%=request.getAttribute("error")%></p>
 			<%
 			}
-			%>			
+			%>
 			<form action="login" method="POST">
 				<div class="mb-3">
-					<label for="email" class="form-label">Correo Electrónico</label>
-					<input type="email" class="form-control" id="email" name="email"
-						required>
+					<label for="email" class="form-label">Correo Electrónico</label> <input
+						type="email" class="form-control" id="email" name="email" required>
 				</div>
 				<div class="mb-3">
 					<label for="password" class="form-label">Contraseña</label> <input
@@ -42,7 +43,7 @@
 				</div>
 				<button type="submit" class="btn btn-primary w-100">Iniciar
 					Sesión</button>
-			</form>			
+			</form>
 			<div class="register-link">
 				<p>
 					¿No tienes cuenta? <a href="registro.jsp">Regístrate</a>

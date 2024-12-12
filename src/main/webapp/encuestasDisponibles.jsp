@@ -11,24 +11,7 @@
 
     <title>Encuestas Disponibles</title>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background-color: #78C0E0;
-            color: black;
-            padding: 10px 0;
-        }
-
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #78C0E0;
-            padding: 10px 0;
-
-        }
+    <link href="assets/styles/styles.css" rel="stylesheet">
     </style>
 </head>
 <body>    
@@ -67,7 +50,7 @@
                                 <input type="hidden" name="idEncuesta" value="<%= encuesta.getIdEncuesta() %>">                               
                                 
                                 <button type="submit" class="btn btn-primary" <%= encuesta.isCaducada() ? "disabled" : "" %>>
-                                    <%= encuesta.isCaducada() ? "Esta encuesta estÃ¡ caducada" : "Realizar Encuesta" %>
+                                    <%= encuesta.isCaducada() ? "Esta encuesta está caducada" : "Realizar Encuesta" %>
                                 </button>
                             </form>
                         </div>

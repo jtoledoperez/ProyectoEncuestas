@@ -4,23 +4,8 @@
     <meta charset="UTF-8">
     <title>Encuestas Serbatic 2024</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #78C0E0;
-            color: black;
-        }
-        header .login {
-            margin: 0;
-        }
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #78C0E0;
-        }
-    </style>
+    <link href="assets/styles/styles.css" rel="stylesheet">
+  
 </head>
 <body>    
     <header class="py-3">
@@ -33,7 +18,7 @@
                     if (sesion == null || sesion.getAttribute("usuario") == null) { 
                 %>                   
                     <form action="login" method="POST">
-                        <button type="submit" class="btn btn-primary">Iniciar sesiÃ³n</button>
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                     </form>
                 <% 
                     } else { 
@@ -59,21 +44,18 @@
                 <div class="col-md-4">
                     <div class="encuesta-item">
                         <h5>${encuesta.titulo}</h5>
-                        <p>${encuesta.descripcion}</p>                     
-
-
+                        <p>${encuesta.descripcion}</p>                   
                     </div>
-                </div>                        
+                </div>                       
                         <a href="listar-encuestas-disponibles" class="btn btn-info">Realizar Encuesta </a>                      
 					</div>
             	</div>
-
             </c:forEach>
         </div>
     </div>
   
     <footer class="py-3">
-        <p>Â© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
+        <p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>   
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

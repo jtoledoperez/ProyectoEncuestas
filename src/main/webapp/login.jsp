@@ -4,43 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login - Encuestas Serbatic 2024</title>
-<!-- Enlazamos con Bootstrap CDN -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<style>
-body {
-	background-color: #f4f4f4;
-}
-
-header {
-	background-color: #78C0E0;
-	color: black;
-}
-
-.login-form {
-	max-width: 500px;
-	margin: 50px auto;
-	padding: 30px;
-	background-color: white;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-footer {
-	margin-top: 40px;
-	text-align: center;
-	color: #78C0E0;
-}
-
-.register-link {
-	text-align: center;
-	margin-top: 20px;
-}
-</style>
+<link href="assets/styles/styles.css" rel="stylesheet">
 </head>
-<body>
-	<!-- Barra de navegaciÃƒÂ³n -->
+<body>	
 	<header class="py-3">
 		<div
 			class="container d-flex justify-content-between align-items-center">
@@ -59,8 +28,7 @@ footer {
 			<p style="color: red;"><%=request.getAttribute("error")%></p>
 			<%
 			}
-			%>
-			<!-- Formulario de login -->
+			%>			
 			<form action="login" method="POST">
 				<div class="mb-3">
 					<label for="email" class="form-label">Correo Electrónico</label>
@@ -74,9 +42,7 @@ footer {
 				</div>
 				<button type="submit" class="btn btn-primary w-100">Iniciar
 					Sesión</button>
-			</form>
-
-			<!-- Enlace para redirigir a la pÃƒÂ¡gina de registro -->
+			</form>			
 			<div class="register-link">
 				<p>
 					¿No tienes cuenta? <a href="registro.jsp">Regístrate</a>
@@ -84,8 +50,6 @@ footer {
 			</div>
 		</div>
 	</div>
-
-	<!-- Pie de pÃƒÂ¡gina -->
 	<footer class="py-3">
 		<p>© 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
 	</footer>

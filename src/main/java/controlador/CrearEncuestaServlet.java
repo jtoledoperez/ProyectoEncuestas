@@ -78,6 +78,7 @@ public class CrearEncuestaServlet extends HttpServlet {
 
             // Guardar el ID en la sesión
             session.setAttribute("idEncuesta", idEncuesta);
+            session.setAttribute("nombreEncuesta", nombreEncuesta);
 
             // Redirigir a la página de creación de preguntas
             response.sendRedirect("crearEncuesta.jsp");

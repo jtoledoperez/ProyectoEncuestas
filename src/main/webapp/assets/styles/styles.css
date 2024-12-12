@@ -1,66 +1,87 @@
 body {
-    background-color: #f4f4f4; /* Estilo global */
+	background-color: #f4f4f4; /* Estilo global */
 }
 
 header {
-    background-color: #78C0E0;
-    color: black;
+	background-color: #78C0E0;
+	color: black;
 }
 
 header .login {
-    margin: 0;
+	margin: 0;
 }
 
 footer {
-    margin-top: 1.5rem; /* mt-3 */
-    text-align: center;
-    color: #78C0E0;
+	margin-top: 1.5rem; /* mt-3 */
+	text-align: center;
+	color: #78C0E0;
 }
+
 .progress {
-    height: 1.25rem; 
-    background-color: #e0e0e0;
+	height: 1.25rem;
+	background-color: #e0e0e0;
 }
+
 .progress-bar {
-    background-color: #78C0E0;
-    transition: width 0.2s ease-in-out;
+	background-color: #78C0E0;
+	transition: width 0.2s ease-in-out;
 }
+
 .form-container {
-    background-color: #fff; 
-    padding: 1.25rem; 
-    border-radius: 0.3125rem; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    margin-top: 2rem; 
+	background-color: #fff;
+	padding: 1.25rem;
+	border-radius: 0.3125rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	margin-top: 2rem;
 }
 
 .form-container h1 {
-    margin-bottom: 1.25rem; 
+	margin-bottom: 1.25rem;
 }
 
 .form-container input {
-    margin-bottom: 0.625rem; 
+	margin-bottom: 0.625rem;
 }
 
 .form-container button {
-    margin-top: 1.25rem; 
+	margin-top: 1.25rem;
 }
+
 .register-link {
-    text-align: center;
-    margin-top: 1.25rem; 
+	text-align: center;
+	margin-top: 1.25rem;
 }
 
 .login-form {
-    max-width: 31.25rem; 
-    margin: 3.125rem auto; 
-    padding: 1.875rem; 
-    background-color: white; 
-    border-radius: 0.625rem; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+	max-width: 31.25rem;
+	margin: 3.125rem auto;
+	padding: 1.875rem;
+	background-color: white;
+	border-radius: 0.625rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .registro-form {
-    max-width: 31.25rem; 
-    margin: 3.125rem auto; 
-    padding: 1.875rem; 
-    background-color: white; 
-    border-radius: 0.625rem; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+	max-width: 31.25rem;
+	margin: 3.125rem auto;
+	padding: 1.875rem;
+	background-color: white;
+	border-radius: 0.625rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+	background: url('../img/heroEncuestas.jpg') no-repeat center center;
+	background-size: cover;
+	height: 40em;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hero-content {
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	border-radius: 10px;
 }

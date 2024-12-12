@@ -12,12 +12,15 @@
 <body>
     <header class="py-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px">
+            		<a href="index.jsp">
+    <img src="assets/img/serbatic_logo_black.svg" class="logo" width="150px" alt="Logo Serbatic">
+</a>
             <h1>Encuestas Serbatic 2024</h1>
             <div class="login">                           
             </div>
         </div>
     </header>
+
     <div class="container form-container">
         <h1>Crear Nueva Encuesta</h1>
         <% if (request.getAttribute("mensajeError") != null) { %>
@@ -30,6 +33,8 @@
                 <p><%= request.getAttribute("mensajeExito") %></p>
             </div>
         <% } %>
+        
+        <!-- Formulario para crear encuesta -->
         <form action="crear-encuesta" method="post">
             <div class="form-group">
                 <label for="nombreEncuesta">Nombre de la Encuesta:</label>
@@ -39,11 +44,32 @@
                 <label for="fechaCaducidad">Fecha de Caducidad:</label>
                 <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
             </div>
-            <button type="submit">Crear Encuesta</button>
+            <button type="submit" class="btn btn-success mt-3">Crear Encuesta</button>
         </form>
     </div>
-    <div class="container form-container">
-        <h1>Crear Pregunta</h1>
+
+    <!-- Mensaje visible mientras la encuesta está en progreso -->
+    <%
+        String nombreEncuesta = "";
+        if (session.getAttribute("nombreEncuesta") != null) {
+            nombreEncuesta = (String) session.getAttribute("nombreEncuesta");
+        }
+    %>
+
+    <div class="container mt-4">
+        <h3 style="font-size: 2rem;">
+            Creando preguntas para la encuesta: <%= nombreEncuesta %>
+        </h3>
+        <div class="d-flex justify-content-end mt-3">
+            <form action="index.jsp" method="get">
+                <button type="submit" class="btn btn-danger">Terminar Encuesta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sección para crear preguntas, visible si la encuesta se ha creado -->
+    <% if (session.getAttribute("nombreEncuesta") != null) { %>
+    <div class="container form-container mt-4">        
         <form action="crear-pregunta" method="post">
             <div class="mb-3">
                 <label for="textoPregunta" class="form-label">Texto de la pregunta:</label>
@@ -51,7 +77,7 @@
             </div>
             <h3>Respuestas:</h3>            
             <div class="mb-3">
-                <label for="res1${formularioContador}" class="form-label">Respuesta 1:</label>
+                <label for="res1" class="form-label">Respuesta 1:</label>
                 <input type="text" class="form-control" name="respuesta1">
             </div>
             <div class="mb-3">
@@ -67,18 +93,19 @@
                 <input type="text" class="form-control" name="respuesta4">
             </div>
             <input type="hidden" name="idEncuesta" value="<%= session.getAttribute("idEncuesta") %>">
-           <% 
-			    String error = (String) request.getAttribute("error");
-			    if (error != null) { 
-			%>
-			    <div>
-			        <p><%= error %></p>
-			    </div>
-			<% } %>
-
+            <% 
+                String error = (String) request.getAttribute("error");
+                if (error != null) { 
+            %>
+                <div>
+                    <p><%= error %></p>
+                </div>
+            <% } %>
             <button type="submit" class="btn btn-success">Crear Pregunta</button>
         </form>
     </div>
+    <% } %>
+
     <footer class="py-3">
         <p>&copy; 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
@@ -88,4 +115,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 

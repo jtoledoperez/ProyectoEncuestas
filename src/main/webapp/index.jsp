@@ -36,6 +36,12 @@
             </div>
         </div>
     </header>
+    <div class="hero-image">
+        <div class="hero-content text-center">
+            <h1 class="display-4 fw-bold">Bienvenido a Encuestas Serbatic</h1>
+            <p class="lead">Crea, gestiona y responde encuestas de manera sencilla y rápida.</p>           
+        </div>
+    </div>
 
     <div class="container mt-4">
         <h2 class="mb-4">Lista de Encuestas</h2>       

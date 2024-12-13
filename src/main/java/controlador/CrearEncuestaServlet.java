@@ -74,7 +74,7 @@ public class CrearEncuestaServlet extends HttpServlet {
 
         // Crear la encuesta utilizando el servicio
         try {
-            int idEncuesta = encuestasService.crearEncuesta(usuario.getNombre(), nombreEncuesta, fechaCaducidad);
+            int idEncuesta = encuestasService.crearEncuesta(usuario.getIdUsuario(), nombreEncuesta, fechaCaducidad);
 
             // Guardar el ID en la sesión
             session.setAttribute("idEncuesta", idEncuesta);

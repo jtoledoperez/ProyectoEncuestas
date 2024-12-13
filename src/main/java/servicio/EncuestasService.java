@@ -24,26 +24,18 @@ public class EncuestasService {
 		this.usuarioDAO = new UsuarioDAO();
 	}
 
-	
-
-	public Integer crearEncuesta(String nombreUsuario, String nombreEncuesta, Date fechaCaducidad) {
-	    Usuario usuario = usuarioDAO.getByNombre(nombreUsuario);
-
+	public Integer crearEncuesta(int idUsusario, String nombreEncuesta, Date fechaCaducidad) {
+	    Usuario usuario = usuarioDAO.getById(idUsusario);
 	  
 	    if (usuario == null) {
 	        throw new IllegalArgumentException("Usuario no encontrado.");
-	    }
-
-	  
+	    }	
 	    if (usuario.getRol() != Rol.CLIENTE) {
 	        throw new IllegalArgumentException("Solo los usuarios con rol 'CLIENTE' pueden crear encuestas.");
-	    }
-
-	  
+	    }	  
 	    if (fechaCaducidad == null || fechaCaducidad.before(new Date())) {
 	        throw new IllegalArgumentException("La fecha de caducidad no puede ser nula ni anterior a la fecha actual.");
 	    }
-
 	   
 	    Encuesta nuevaEncuesta = new Encuesta(nombreEncuesta, usuario, fechaCaducidad);
 	    encuestaDAO.save(nuevaEncuesta);
@@ -59,7 +51,6 @@ public class EncuestasService {
 
 	public List<Encuesta> listarEncuestasActivas() {
 		List<Encuesta> todasLasEncuestas = encuestaDAO.getAll();
-
 
 		Date hoy = new Date();
 		return todasLasEncuestas.stream()

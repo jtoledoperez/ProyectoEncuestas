@@ -71,13 +71,13 @@ footer {
 }
 
 .hero-image {
-	background: url('../img/heroEncuestas.jpg') no-repeat center center;
-	background-size: cover;
-	height: 40em;
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    background: url('../img/heroEncuestas.jpg') no-repeat center center !important;
+    background-size: cover !important;
+    height: 40em;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-content {

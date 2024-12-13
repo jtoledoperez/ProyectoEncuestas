@@ -75,7 +75,7 @@
             </div>
         <% } %>
 
-        <!-- Formulario para crear encuesta -->
+        <!-- Formulario para crear encuesta 
         <form action="crear-encuesta" method="post">
 
             <div class="form-group">
@@ -90,46 +90,30 @@
                 <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
             </div>
             <button type="submit">Crear Encuesta</button>
-
-
         </form>
-    </div>
-
-    <!-- Formulario de creación de pregunta -->
-    <div class="container form-container">
-        <h1>Crear Pregunta</h1>
-        <form action="crear-pregunta" method="post">
-            <div class="mb-3">
-                <label for="textoPregunta" class="form-label">Texto de la pregunta:</label>
-                <input type="text" class="form-control" id="pregunta" name="pregunta">
-            </div>
-
-            <h3>Respuestas:</h3>
-            
-            <div class="mb-3">
-                <label for="res1${formularioContador}" class="form-label">Respuesta 1:</label>
-                <input type="text" class="form-control" name="respuesta1">
-            </div>
-
-            <div class="mb-3">
-                <label for="respuesta2" class="form-label">Respuesta 2:</label>
-                <input type="text" class="form-control" name="respuesta2">
-            </div>
-
-            <div class="mb-3">
-                <label for="respuesta3" class="form-label">Respuesta 3:</label>
-                <input type="text" class="form-control" name="respuesta3">
-            </div>
-
-            <div class="mb-3">
-                <label for="respuesta4" class="form-label">Respuesta 4:</label>
-                <input type="text" class="form-control" name="respuesta4">
-            </div>
-
-            <!-- Campo oculto para el id de la encuesta -->
-            <input type="hidden" name="idEncuesta" value="<%= session.getAttribute("idEncuesta") %>">
-
-            <!-- Mensajes de error -->
+    </div>-->
+    
+        <!-- Formulario para crear encuesta -->
+    <form action="crear-encuesta"  method="post" id="formularioEncuesta" target="iframe-oculto">
+        <div class="form-group">
+            <label for="nombreEncuesta">Nombre de la Encuesta:</label>
+            <input type="text" class="form-control" id="nombreEncuesta" name="nombreEncuesta" required>
+        </div>
+        <div class="form-group">
+            <label for="fechaCaducidad">Fecha de Caducidad:</label>
+                <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
+        </div>
+            <button type="submit" id="generateSurvey">Generar Nueva Encuesta</button>    
+    </form>
+    <div id="surveysContainer"></div>
+    <iframe name="iframe-oculto" style="display:none"></iframe>
+           
+           <% 
+			  if (session.getAttribute("idEncuesta")!=null) { %>
+			   <input type='hidden' id="miIdEncuestaActual" value="<%= session.getAttribute("idEncuesta") %>">
+			
+			<% } %>
+              <!-- Mensajes de error -->
            <% 
 			    String error = (String) request.getAttribute("error");
 			    if (error != null) { 
@@ -139,15 +123,120 @@
 			    </div>
 			<% } %>
 
-            <button type="submit" class="btn btn-success">Crear Pregunta</button>
-        </form>
-    </div>
-
     <!-- Pie de página -->
     <footer class="py-3">
         <p>&copy; 2024 Encuestas Serbatic. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        document.getElementById('generateSurvey').addEventListener('click', function(e) {
+            
+            const surveysContainer = document.getElementById('surveysContainer');
+            
+            const survey = document.createElement('div');
+            survey.className = 'survey';
+
+            const surveyTitle = document.createElement('h2');
+            surveyTitle.textContent =  document.getElementById("nombreEncuesta").value;
+            survey.appendChild(surveyTitle);
+
+            const surveyAliveTime = document.createElement('p');
+            surveyAliveTime.textContent = "Activa hasta: " + document.getElementById("fechaCaducidad").value;
+            survey.appendChild(surveyAliveTime)
+
+            const addQuestionButton = document.createElement('button');
+            addQuestionButton.textContent = 'Añadir Pregunta';
+            survey.appendChild(addQuestionButton);
+
+            addQuestionButton.addEventListener('click', function() {
+                const questionContainer = document.createElement('div');
+                questionContainer.className = 'container form-container';
+
+                const questionForm = document.createElement("form");
+                questionForm.action = "crear-pregunta";
+                questionForm.method = "post";
+                questionContainer.appendChild(questionForm)
+                
+                const divBootStyle = document.createElement("div");
+                divBootStyle.className = "mb-3";
+                questionForm.appendChild(divBootStyle);
+
+                const labelQuestionText = document.createElement('label');
+                labelQuestionText.for ="textoPregunta";
+                labelQuestionText.className = 'form-label';
+                labelQuestionText.textContent = 'Texto de la pregunta: ';
+                divBootStyle.appendChild(labelQuestionText);
+
+                const questionInput = document.createElement('input');
+                questionInput.type = 'text';
+                questionInput.placeholder = 'Escribe tu pregunta aquí';
+                questionInput.className = "form-control";
+                questionInput.name = "pregunta";
+                questionInput.id = 'pregunta';
+                divBootStyle.appendChild(questionInput);
+
+                //momento añadir preguntas
+
+                for (let i = 1; i <= 4; i++) {
+                    const divBootsStyleA = document.createElement('div');
+                    divBootsStyleA.className = "mb-3";
+                    const answerLabel = document.createElement('label');
+                    answerLabel.for = 'res1${formularioContador}';
+                    answerLabel.className = 'form-label;'
+                    answerLabel.textContent = `Respuesta ${i}:`;
+                    divBootsStyleA.appendChild(answerLabel);
+
+                    const answerInput = document.createElement('input');
+                    answerInput.type = 'text';
+                    answerInput.placeholder = `Respuesta ${i}`;
+                    answerInput.className = 'form-control';
+                    answerInput.name = 'respuesta';
+                    divBootsStyleA.appendChild(answerInput);
+                    questionForm.appendChild(divBootsStyleA);
+                }
+
+                const hideIdInput = document.createElement('input');
+                hideIdInput.type = 'hidden';
+                hideIdInput.name = 'idEncuesta';
+                
+                //
+                hideIdInput.value = document.getElementById("miIdEncuestaActual").value;
+                questionForm.appendChild(hideIdInput);
+
+                const finishButton = document.createElement('button');
+                finishButton.textContent = 'Finalizar Pregunta';
+                finishButton.type = 'submit';
+                finishButton.class = 'btn btn.success';
+                finishButton.target = 'iframe-oculto'
+                questionForm.appendChild(finishButton);
+        
+                finishButton.addEventListener('click', function(e) {
+                    
+                    /*const questionText = questionInput.value;
+                    const answerInputs = questionContainer.querySelectorAll('input[type="text"]:not(:first-child)');
+                    
+                    // Reemplazar el input de la pregunta con un párrafo
+                    const questionParagraph = document.createElement('p');
+                    questionParagraph.textContent = questionText;
+                    questionForm.replaceChild(questionParagraph, questionInput);
+
+                    // Reemplazar los inputs de respuestas con párrafos
+                    answerInputs.forEach(input => {
+                        const answerParagraph = document.createElement('p');
+                        answerParagraph.textContent = input.value;
+                        questionForm.replaceChild(answerParagraph, input);
+                    });*/
+
+                    // Eliminar el botón de finalizar
+                    questionForm.removeChild(finishButton);
+                });
+
+                survey.appendChild(questionContainer);
+            });
+
+            //surveysContainer.appendChild(survey);
+        });
+    </script>
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

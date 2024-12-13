@@ -70,7 +70,7 @@ public class CrearEncuestaServlet extends HttpServlet {
 
         if (resultado.equals("Encuesta creada exitosamente.")) {
             request.setAttribute("mensajeExito", resultado);
-            request.getRequestDispatcher("listarEncuestas.jsp").forward(request, response);
+            request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);
         } else {
             request.setAttribute("mensajeError", resultado);
             request.getRequestDispatcher("crearEncuesta.jsp").forward(request, response);

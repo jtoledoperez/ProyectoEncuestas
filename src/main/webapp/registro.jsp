@@ -36,27 +36,35 @@
 			<%
 			}
 			%>
-			<form action="registro" method="POST">
+			<form action="registro" class="needs-validation" novalidate method="POST">
 				<div class="mb-3">
 					<label for="nombre" class="form-label">Nombre</label> <input
-						type="text" class="form-control" id="nombre" name="nombre"
+						type="text" class="form-control" pattern="[A-Za-z ]+" id="nombre" name="nombre"
 						required>
+						<div class="invalid-feedback">
+						Utilice solo letras y espacios
+						</div>
 				</div>
 				<div class="mb-3">
 					<label for="apellidos" class="form-label">Apellidos</label> <input
-						type="text" class="form-control" id="apellidos" name="apellidos"
+						type="text" class="form-control" pattern="[A-Za-z ]+" id="apellidos" name="apellidos"
 						required>
+						<div class="invalid-feedback">
+						Utilice solo letras y espacios
+						</div>
 				</div>
 				<div class="mb-3">
 					<label for="email" class="form-label">Correo Electrónico</label> <input
 						type="email" class="form-control" id="email" name="email" required>
+						<div class="invalid-feedback">
+						Correo invalido
+						</div>
 				</div>
 				<div class="mb-3">
 					<label for="password" class="form-label">Contraseña</label> <input
 						type="password" class="form-control" id="password" name="password"
 						required>
 				</div>
-
 				<button type="submit" class="btn btn-primary w-100">Registrarse</button>
 			</form>
 		</div>
@@ -68,5 +76,22 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+		<script>
+		(() => {
+		  'use strict'
+		  const forms = document.querySelectorAll('.needs-validation')
+		  Array.from(forms).forEach(form => {
+		    form.addEventListener('submit', event => {
+		      if (!form.checkValidity()) {
+		        event.preventDefault()
+		        event.stopPropagation()
+		      }
+		      form.classList.add('was-validated')
+		    }, false)
+		  })
+		})()
+
+</script>
+
 </body>
 </html>
